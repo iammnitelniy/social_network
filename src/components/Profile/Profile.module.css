@@ -1,0 +1,12 @@
+.content {
+    width: 100%;
+    justify-self: center;
+    grid-area: c;
+    background-color: deepskyblue;
+}
+
+
+
+.item {
+    color: orangered;
+}
