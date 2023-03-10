@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './MyPosts.module.css'
 import {Post} from "./Post/Post";
 
-type MyPostsPropsType = any
+type MyPostsPropsType = any;
 
 export function MyPosts(props: MyPostsPropsType) {
     return (
@@ -19,10 +19,10 @@ export function MyPosts(props: MyPostsPropsType) {
 
             <div className={classes.posts}>
 
-                <Post/>
-                <Post/>
-                <Post/>
-                <Post/>
+                <Post content={"bow"} countLikes={12} countDislikes={0}/>
+                <Post content={"wow"} countLikes={16} countDislikes={7}/>
+                <Post content={"get"} countLikes={2} countDislikes={5}/>
+                <Post content={"down"} countLikes={9} countDislikes={3}/>
 
 
             </div>
