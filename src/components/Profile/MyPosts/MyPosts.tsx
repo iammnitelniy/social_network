@@ -6,11 +6,14 @@ type MyPostsPropsType = any;
 
 export function MyPosts(props: MyPostsPropsType) {
     return (
-        <div>
+        <div className={classes.postsBlock}>
             <div>
-                My posts
+                <h3>My posts</h3>
                 <div>
+                    <div>
+
                     <textarea></textarea>
+                    </div>
                     <button>Add post</button>
                     <button>Remove</button>
 
