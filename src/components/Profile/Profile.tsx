@@ -3,8 +3,20 @@ import classes from './Profile.module.css'
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
+export type PostItemType= {
+    id: number
+    content: string
+    countLikes: number
+    countDislikes: number
+}
 
-type ProfilePropsType = any
+type ProfilePropsType = {
+        posts: Array<PostItemType>
+}
+
+
+
+
 
 export function Profile(props: ProfilePropsType) {
     return (
@@ -12,7 +24,7 @@ export function Profile(props: ProfilePropsType) {
 
             <ProfileInfo/>
 
-            <MyPosts/>
+            <MyPosts posts={props.posts}/>
 
         </div>
 

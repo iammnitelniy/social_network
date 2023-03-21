@@ -3,17 +3,33 @@ import './App.css';
 import Technologies from "./Technologies"
 import {Header} from "./components/Header/Header";
 import {Nav} from "./components/Nav/Nav";
-import {Profile} from "./components/Profile/Profile";
+import {PostItemType, Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 
+type AppPropsType = {
+    posts: Array<PostItemType>
+    dialogs: Array<DialogItemType>
+    messages: Array<MessageItemType>
+}
+export type DialogItemType = {
+    id: number
+    name: string
+}
+export type MessageItemType= {
+    id: number
+    message: string
+}
 
-const App = () => {
-    const arrayHeader = ["Home ", "News Feed ", "Messages "]
-    const technologiesNames = ["bow ", "wow ", "wow "]
+
+const App = (props:AppPropsType) => {
+
+
+    // const arrayHeader = ["Home ", "News Feed ", "Messages "]
+    // const technologiesNames = ["bow ", "wow ", "wow "]
     const navbarNames = ["Profile", "Messages", "News", "Music", "Settings"]
     return (
         <BrowserRouter>
@@ -26,11 +42,11 @@ const App = () => {
                 />
 
                 <div className="app-wrapper-content">
-                    <Route path='/dialogs' component={Dialogs}/>
-                    <Route path='/profile' component={Profile}/>
-                    <Route path='/news' component={News}/>
-                    <Route path='/music' component={Music}/>
-                    <Route path='/settings' component={Settings}/>
+                    <Route path='/dialogs' render={() => <Dialogs dialogs={props.dialogs} messages={props.messages}/>}/>
+                    <Route path='/profile' render={() => <Profile posts={props.posts}/>}/>
+                    {/*<Route path='/news' component={News}/>*/}
+                    {/*<Route path='/music' component={Music}/>*/}
+                    {/*<Route path='/settings' component={Settings}/>*/}
                 </div>
 
 
