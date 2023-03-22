@@ -9,11 +9,12 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
+import {DialogsPageStateType, ProfilePageStateType, StateType} from "./redux/state";
+import {Sidebar} from "./components/Sidebar/Sidebar";
+
 
 type AppPropsType = {
-    posts: Array<PostItemType>
-    dialogs: Array<DialogItemType>
-    messages: Array<MessageItemType>
+    state: StateType
 }
 export type DialogItemType = {
     id: number
@@ -42,8 +43,14 @@ const App = (props:AppPropsType) => {
                 />
 
                 <div className="app-wrapper-content">
-                    <Route path='/dialogs' render={() => <Dialogs dialogs={props.dialogs} messages={props.messages}/>}/>
-                    <Route path='/profile' render={() => <Profile posts={props.posts}/>}/>
+                    <Route path='/dialogs'
+                           render={() => <Dialogs
+                               stateDialogs={props.state.dialogsPage}
+                               />}/>
+                    <Route path='/profile'
+                           render={() => <Profile
+                               stateProfile={props.state.profilePage}/>}/>
+                    <Sidebar sidebar={props.state.sidebar}/>
                     {/*<Route path='/news' component={News}/>*/}
                     {/*<Route path='/music' component={Music}/>*/}
                     {/*<Route path='/settings' component={Settings}/>*/}

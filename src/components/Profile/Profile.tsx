@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './Profile.module.css'
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
+import {ProfilePageStateType} from "../../redux/state";
 
 export type PostItemType= {
     id: number
@@ -11,7 +12,7 @@ export type PostItemType= {
 }
 
 type ProfilePropsType = {
-        posts: Array<PostItemType>
+        stateProfile: ProfilePageStateType
 }
 
 
@@ -24,7 +25,7 @@ export function Profile(props: ProfilePropsType) {
 
             <ProfileInfo/>
 
-            <MyPosts posts={props.posts}/>
+            <MyPosts posts={props.stateProfile.postData}/>
 
         </div>
 
