@@ -4,6 +4,7 @@ import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {ProfilePageStateType} from "../../redux/state";
 
+
 export type PostItemType= {
     id: number
     content: string
@@ -13,6 +14,9 @@ export type PostItemType= {
 
 type ProfilePropsType = {
         stateProfile: ProfilePageStateType
+        addPost: any
+        updateNewPostText: (newPost:string)=> void
+
 }
 
 
@@ -25,7 +29,7 @@ export function Profile(props: ProfilePropsType) {
 
             <ProfileInfo/>
 
-            <MyPosts posts={props.stateProfile.postData}/>
+            <MyPosts posts={props.stateProfile.postData} updateNewPostText={props.updateNewPostText} addPost={props.addPost} newPostText={props.stateProfile.newPostText}/>
 
         </div>
 

@@ -15,6 +15,10 @@ import {Sidebar} from "./components/Sidebar/Sidebar";
 
 type AppPropsType = {
     state: StateType
+    addPost: any
+    updateNewPostText: (newPost:string)=> void
+
+
 }
 export type DialogItemType = {
     id: number
@@ -48,8 +52,8 @@ const App = (props:AppPropsType) => {
                                stateDialogs={props.state.dialogsPage}
                                />}/>
                     <Route path='/profile'
-                           render={() => <Profile
-                               stateProfile={props.state.profilePage}/>}/>
+                           render={() => <Profile updateNewPostText = {props.updateNewPostText}
+                               stateProfile={props.state.profilePage} addPost={props.addPost}/>}/>
                     <Sidebar sidebar={props.state.sidebar}/>
                     {/*<Route path='/news' component={News}/>*/}
                     {/*<Route path='/music' component={Music}/>*/}

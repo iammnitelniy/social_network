@@ -5,6 +5,7 @@ import {DialogItem} from "./Dialogitem/Dialogitem";
 import {Message} from "./Message/Message";
 import {DialogItemType, MessageItemType} from "../../App";
 import {DialogsPageStateType} from "../../redux/state";
+import {useRef} from "react";
 
 
 type DialogsPropsType = {
@@ -23,12 +24,14 @@ export const Dialogs = (props: DialogsPropsType) => {
 
 
 
+
     return (
         <div className={classes.dialogs}>
             <div className={classes.dialogsItems}>
                 <div className={classes.dialog}>
 
-                    {props.stateDialogs.dialogsData.map((el)=> <DialogItem key={el.id} id={el.id} name={el.name} />)}
+                    {props.stateDialogs.dialogsData.map((el)=> <DialogItem key={el.id} id={el.id} name={el.name}/> )}
+
 
 
 
