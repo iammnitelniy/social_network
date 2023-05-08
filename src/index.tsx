@@ -14,6 +14,7 @@ import App, {DialogItemType, MessageItemType} from './App';
 // import {addPost, subscribe, updateNewPostText} from "./redux/state";
 import {PostItemType} from "./components/Profile/Profile";
 import {store, StateType} from "./redux/state";
+import {BrowserRouter} from "react-router-dom";
 
 
 
@@ -24,12 +25,16 @@ import {store, StateType} from "./redux/state";
 // addPost("Samuraijs.com")
 
     ReactDOM.render(
-        <App state={state} addPost={store.addPost.bind(store)} updateNewPostText={store.updateNewPostText.bind(store)}/>,
+        <BrowserRouter>
+
+            <App state={state} dispatch={store.dispatch.bind(store)}/>
+
+        </BrowserRouter>,
         document.getElementById('root')
     );
 }
 
-
+// updateNewPostText={store.updateNewPostText.bind(store)
 rerenderEntireTree(store.getState())
 
 store.subscribe(rerenderEntireTree)

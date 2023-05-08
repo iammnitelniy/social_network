@@ -3,35 +3,46 @@ import classes from './MyPosts.module.css'
 import {Post} from "./Post/Post";
 import {PostItemType} from "../Profile";
 import {useRef} from "react";
+import {MouseEvent} from "react";
+import {
+    ActionTypes, addPostActionCreator,
+    AddPostActionType,
+    ChangeNewTextActionType,
+    updateNewPostTextActionCreator
+} from "../../../redux/state";
 
 type MyPostsPropsType = {
     posts: Array<PostItemType>
-    addPost: any
+    addPost?: any
     newPostText: string
-    updateNewPostText: (newPost:string)=> void
+    updateNewPostText?: (newPost:string)=> void
+    dispatch: (action: ActionTypes)=> void
+
 
 };
+
+
 
 export function MyPosts(props: MyPostsPropsType) {
 
     let newPostElement:any = React.createRef()
 
-    const addPostHandler = (e:any) => {
+    const addPostHandler = (e:MouseEvent<HTMLButtonElement>) => {
 
         let text
-
         if (newPostElement.current !== null) {
             text = newPostElement.current.value
         }
-        props.addPost(text)
+        let action = addPostActionCreator(text)
+        props.dispatch(action)
         newPostElement.current.value=("")
 
     }
 
     let onPostChange = () => {
-        const text = newPostElement.current.value
-        console.log(text)
-        props.updateNewPostText(text)
+        const newText = newPostElement.current.value
+        let action = updateNewPostTextActionCreator(newText)
+        props.dispatch(action)
     }
 
     return (

@@ -4,13 +4,14 @@ import {NavLink} from "react-router-dom";
 import {DialogItem} from "./Dialogitem/Dialogitem";
 import {Message} from "./Message/Message";
 import {DialogItemType, MessageItemType} from "../../App";
-import {DialogsPageStateType} from "../../redux/state";
+import {ActionTypes, DialogsPageStateType} from "../../redux/state";
 import {useRef} from "react";
 
 
 type DialogsPropsType = {
 
-        stateDialogs: DialogsPageStateType
+    stateDialogs: DialogsPageStateType
+    dispatch: (action: ActionTypes)=> void
 
     // state : Array<DialogItemType>
     // state : Array<MessageItemType>
@@ -18,11 +19,7 @@ type DialogsPropsType = {
 };
 
 
-
-
 export const Dialogs = (props: DialogsPropsType) => {
-
-
 
 
     return (
@@ -30,9 +27,7 @@ export const Dialogs = (props: DialogsPropsType) => {
             <div className={classes.dialogsItems}>
                 <div className={classes.dialog}>
 
-                    {props.stateDialogs.dialogsData.map((el)=> <DialogItem key={el.id} id={el.id} name={el.name}/> )}
-
-
+                    {props.stateDialogs.dialogsData.map((el) => <DialogItem key={el.id} id={el.id} name={el.name}/>)}
 
 
                 </div>
@@ -42,7 +37,9 @@ export const Dialogs = (props: DialogsPropsType) => {
 
             </div>
             <div className={classes.messages}>
-                {props.stateDialogs.messagesData.map((el)=> <Message key={el.id} id={el.id} message={el.message} />)}
+                <div>{props.stateDialogs.messagesData.map((el) => <Message key={el.id} id={el.id} dispatch={props.dispatch}
+                                                                           message={el.message} stateDialogs={props.stateDialogs}/>)}</div>
+
 
             </div>
         </div>

@@ -2,10 +2,10 @@ import React from 'react';
 import classes from './Profile.module.css'
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ProfilePageStateType} from "../../redux/state";
+import {ActionTypes, AddPostActionType, ChangeNewTextActionType, ProfilePageStateType} from "../../redux/state";
 
 
-export type PostItemType= {
+export type PostItemType = {
     id: number
     content: string
     countLikes: number
@@ -13,14 +13,13 @@ export type PostItemType= {
 }
 
 type ProfilePropsType = {
-        stateProfile: ProfilePageStateType
-        addPost: any
-        updateNewPostText: (newPost:string)=> void
+    stateProfile: ProfilePageStateType
+    addPost?: any
+    updateNewPostText?: (newPost: string) => void
+    dispatch: (action: ActionTypes) => void
+
 
 }
-
-
-
 
 
 export function Profile(props: ProfilePropsType) {
@@ -29,7 +28,8 @@ export function Profile(props: ProfilePropsType) {
 
             <ProfileInfo/>
 
-            <MyPosts posts={props.stateProfile.postData} updateNewPostText={props.updateNewPostText} addPost={props.addPost} newPostText={props.stateProfile.newPostText}/>
+            <MyPosts posts={props.stateProfile.postData} dispatch={props.dispatch}
+                     newPostText={props.stateProfile.newPostText}/>
 
         </div>
 

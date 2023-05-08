@@ -9,14 +9,22 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {DialogsPageStateType, ProfilePageStateType, StateType} from "./redux/state";
+import {
+    ActionTypes,
+    AddPostActionType,
+    ChangeNewTextActionType,
+    DialogsPageStateType,
+    ProfilePageStateType,
+    StateType
+} from "./redux/state";
 import {Sidebar} from "./components/Sidebar/Sidebar";
 
 
 type AppPropsType = {
     state: StateType
-    addPost: any
-    updateNewPostText: (newPost:string)=> void
+    addPost?: any
+    updateNewPostText?: (newPost:string)=> void
+    dispatch: (action: ActionTypes)=> void
 
 
 }
@@ -27,6 +35,7 @@ export type DialogItemType = {
 export type MessageItemType= {
     id: number
     message: string
+
 }
 
 
@@ -50,10 +59,12 @@ const App = (props:AppPropsType) => {
                     <Route path='/dialogs'
                            render={() => <Dialogs
                                stateDialogs={props.state.dialogsPage}
+                               dispatch={props.dispatch}
                                />}/>
                     <Route path='/profile'
-                           render={() => <Profile updateNewPostText = {props.updateNewPostText}
-                               stateProfile={props.state.profilePage} addPost={props.addPost}/>}/>
+                           render={() =>
+                    <Profile dispatch={props.dispatch}
+                             stateProfile={props.state.profilePage} />}/>
                     <Sidebar sidebar={props.state.sidebar}/>
                     {/*<Route path='/news' component={News}/>*/}
                     {/*<Route path='/music' component={Music}/>*/}
