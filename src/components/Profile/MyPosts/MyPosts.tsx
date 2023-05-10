@@ -1,15 +1,15 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import classes from './MyPosts.module.css'
 import {Post} from "./Post/Post";
 import {PostItemType} from "../Profile";
 import {useRef} from "react";
 import {MouseEvent} from "react";
-import {
-    ActionTypes, addPostActionCreator,
-    AddPostActionType,
-    ChangeNewTextActionType,
+import {addPostActionCreator,
     updateNewPostTextActionCreator
-} from "../../../redux/state";
+} from "../../../redux/profileReducer";
+import {ActionTypes} from "../../../redux/state";
+
+
 
 type MyPostsPropsType = {
     posts: Array<PostItemType>
@@ -39,7 +39,7 @@ export function MyPosts(props: MyPostsPropsType) {
 
     }
 
-    let onPostChange = () => {
+    let onPostChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
         const newText = newPostElement.current.value
         let action = updateNewPostTextActionCreator(newText)
         props.dispatch(action)

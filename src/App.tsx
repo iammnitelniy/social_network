@@ -15,7 +15,7 @@ import {
     ChangeNewTextActionType,
     DialogsPageStateType,
     ProfilePageStateType,
-    StateType
+    StateType, StoreType
 } from "./redux/state";
 import {Sidebar} from "./components/Sidebar/Sidebar";
 
@@ -25,6 +25,7 @@ type AppPropsType = {
     addPost?: any
     updateNewPostText?: (newPost:string)=> void
     dispatch: (action: ActionTypes)=> void
+    store: StoreType
 
 
 }
@@ -58,8 +59,8 @@ const App = (props:AppPropsType) => {
                 <div className="app-wrapper-content">
                     <Route path='/dialogs'
                            render={() => <Dialogs
-                               stateDialogs={props.state.dialogsPage}
-                               dispatch={props.dispatch}
+
+                               store={props.store}
                                />}/>
                     <Route path='/profile'
                            render={() =>

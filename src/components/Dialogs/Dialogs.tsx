@@ -1,17 +1,26 @@
-import React from 'react';
+import React, {ChangeEvent, MouseEvent} from 'react';
 import classes from './Dialogs.module.css'
 import {NavLink} from "react-router-dom";
 import {DialogItem} from "./Dialogitem/Dialogitem";
 import {Message} from "./Message/Message";
 import {DialogItemType, MessageItemType} from "../../App";
-import {ActionTypes, DialogsPageStateType} from "../../redux/state";
+import {
+    ActionTypes,
+    DialogsPageStateType,
+    StoreType,
+
+} from "../../redux/state";
 import {useRef} from "react";
+import {sendMessageActionCreator, updateNewMessageBodyCreator} from "../../redux/dialogsReducer";
+
+
 
 
 type DialogsPropsType = {
 
-    stateDialogs: DialogsPageStateType
-    dispatch: (action: ActionTypes)=> void
+
+
+    store: StoreType
 
     // state : Array<DialogItemType>
     // state : Array<MessageItemType>
@@ -22,12 +31,41 @@ type DialogsPropsType = {
 export const Dialogs = (props: DialogsPropsType) => {
 
 
+    let state = props.store.getState().dialogsPage
+
+    const DialogElement =
+        state.dialogsData.map((el) => <DialogItem key={el.id} id={el.id} name={el.name}/>)
+
+    const MessageElement =
+        state.messagesData.map((el) => <Message key={el.id} id={el.id}
+                                                             message={el.message}  />)
+    const newMessageBody = state.newMessageBody
+
+
+    const newMessageClickHandler = (e:MouseEvent<HTMLButtonElement>) => {
+        props.store.dispatch(sendMessageActionCreator())
+
+
+
+    }
+
+    const onChangeMessageHandler= (e: ChangeEvent<HTMLTextAreaElement>) => {
+
+        let body =  e.currentTarget.value
+
+        props.store.dispatch(updateNewMessageBodyCreator(body))
+
+
+    }
+
+
+
     return (
         <div className={classes.dialogs}>
             <div className={classes.dialogsItems}>
                 <div className={classes.dialog}>
 
-                    {props.stateDialogs.dialogsData.map((el) => <DialogItem key={el.id} id={el.id} name={el.name}/>)}
+                    {DialogElement}
 
 
                 </div>
@@ -37,10 +75,15 @@ export const Dialogs = (props: DialogsPropsType) => {
 
             </div>
             <div className={classes.messages}>
-                <div>{props.stateDialogs.messagesData.map((el) => <Message key={el.id} id={el.id} dispatch={props.dispatch}
-                                                                           message={el.message} stateDialogs={props.stateDialogs}/>)}</div>
+                <div>{MessageElement}</div>
 
-
+                <textarea value={newMessageBody}
+                          onChange={onChangeMessageHandler}
+                          placeholder="Enter your message"
+                ></textarea>
+                <div>
+                    <button onClick={newMessageClickHandler}>Send</button>
+                </div>
             </div>
         </div>
     )

@@ -9,6 +9,7 @@ type SidebarPropsType = {
 
 
 export function Sidebar(props:SidebarPropsType) {
+    console.log(props.sidebar)
     return (
         <div>
 
