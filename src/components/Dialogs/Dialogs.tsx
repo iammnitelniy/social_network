@@ -22,6 +22,7 @@ type DialogsPropsType = {
 
     store: StoreType
         //commit
+        //commit2
     // state : Array<DialogItemType>
     // state : Array<MessageItemType>
 
