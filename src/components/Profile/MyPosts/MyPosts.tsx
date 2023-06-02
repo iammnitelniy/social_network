@@ -13,10 +13,10 @@ import {ActionTypes} from "../../../redux/store";
 
 type MyPostsPropsType = {
     posts: Array<PostItemType>
-    addPost?: any
+    addPost: any
     newPostText: string
-    updateNewPostText?: (newPost:string)=> void
-    dispatch: (action: ActionTypes)=> void
+    updateNewPostText: (newPost:string)=> void
+    dispatch?: (action: ActionTypes)=> void
 
 
 };
@@ -33,17 +33,40 @@ export function MyPosts(props: MyPostsPropsType) {
         if (newPostElement.current !== null) {
             text = newPostElement.current.value
         }
-        let action = addPostActionCreator(text)
-        props.dispatch(action)
-        newPostElement.current.value=("")
+        // let action = addPostActionCreator(text)
+        // props.dispatch(action)
+
+        // const text = newPostElement.current?.value
+        //
+        // text &&
+        props.addPost(text)
+        // newPostElement.current.value=("")
 
     }
 
     let onPostChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
-        const newText = newPostElement.current.value
-        let action = updateNewPostTextActionCreator(newText)
-        props.dispatch(action)
+        // let newText
+        // if (newPostElement.current !== null) {
+        //  newText = newPostElement.current.value}
+
+        props.updateNewPostText(e.currentTarget.value)
+        // let action = updateNewPostTextActionCreator(e.currentTarget.value)
+        // props.dispatch(action)
     }
+
+    // export const PostForm = (props: PropsType) => {
+    //     const {currentUser, profilePage} = props
+    //
+    //     let newPostElement = React.createRef<HTMLTextAreaElement>()
+    //
+    //     const addPostHandler = () => {
+    //         props.addPost()
+    //     }
+    //
+    //     const onPostChange = () => {
+    //         const text = newPostElement.current?.value
+    //         text && props.onPostChange(text)
+    //     }
 
     return (
         <div className={classes.postsBlock}>

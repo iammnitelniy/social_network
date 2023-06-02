@@ -64,8 +64,8 @@ const App = (props:AppPropsType) => {
                                />}/>
                     <Route path='/profile'
                            render={() =>
-                    <Profile dispatch={props.dispatch}
-                             stateProfile={props.state.profilePage} />}/>
+                    <Profile dispatch={props.dispatch} store={props.store}
+                             stateProfile={props.state.profilePage} addPost={props.addPost}/>}/>
                     <Sidebar sidebar={props.state.sidebar}/>
                     {/*<Route path='/news' component={News}/>*/}
                     {/*<Route path='/music' component={Music}/>*/}
