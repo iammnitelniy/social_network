@@ -20,8 +20,10 @@ import store from "../../redux/redux-store";
 type DialogsPropsType = {
 
 
-
-    store: StoreType
+    updateNewMessageBody: (body: string)=> void
+    // store: StoreType
+    dialogsPage: any
+    newMessageClicker: () => void
         //commit
         //commit2
     // state : Array<DialogItemType>
@@ -33,20 +35,20 @@ type DialogsPropsType = {
 export const Dialogs = (props: DialogsPropsType) => {
 
 
-    let state = props.store.getState().dialogsPage
+    let state = props.dialogsPage
 
     const DialogElement =
-        state.dialogsData.map((el) => <DialogItem key={el.id} id={el.id} name={el.name}/>)
+        state.dialogsData.map((el: DialogItemType) => <DialogItem key={el.id} id={el.id} name={el.name}/>)
 
     const MessageElement =
-        state.messagesData.map((el) => <Message key={el.id} id={el.id}
+        state.messagesData.map((el: MessageItemType) => <Message key={el.id} id={el.id}
                                                              message={el.message}  />)
     const newMessageBody = state.newMessageBody
 
 
     const newMessageClickHandler = (e:MouseEvent<HTMLButtonElement>) => {
-        store.dispatch(sendMessageActionCreator())
-
+        // store.dispatch(sendMessageActionCreator())
+        props.newMessageClicker()
 
 
     }
@@ -54,8 +56,8 @@ export const Dialogs = (props: DialogsPropsType) => {
     const onChangeMessageHandler= (e: ChangeEvent<HTMLTextAreaElement>) => {
 
         let body =  e.currentTarget.value
-
-        store.dispatch(updateNewMessageBodyCreator(body))
+        props.updateNewMessageBody(body)
+        // store.dispatch(updateNewMessageBodyCreator(body))
 
 
     }

@@ -13,11 +13,12 @@ import {
 import {useRef} from "react";
 import {sendMessageActionCreator, updateNewMessageBodyCreator} from "../../redux/dialogsReducer";
 import store from "../../redux/redux-store";
+import {Dialogs} from "./Dialogs";
 
 
 
 
-type DialogsPropsType = {
+type DialogsContainerPropsType = {
 
 
 
@@ -30,7 +31,7 @@ type DialogsPropsType = {
 };
 
 
-export const Dialogs = (props: DialogsPropsType) => {
+export const DialogsContainer = (props: DialogsContainerPropsType) => {
 
 
     let state = props.store.getState().dialogsPage
@@ -44,16 +45,15 @@ export const Dialogs = (props: DialogsPropsType) => {
     const newMessageBody = state.newMessageBody
 
 
-    const newMessageClickHandler = (e:MouseEvent<HTMLButtonElement>) => {
+    const newMessageClicker = () => {
         store.dispatch(sendMessageActionCreator())
 
 
 
     }
 
-    const onChangeMessageHandler= (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const onChangeMessageHandler= (body: string) => {
 
-        let body =  e.currentTarget.value
 
         store.dispatch(updateNewMessageBodyCreator(body))
 
@@ -62,33 +62,6 @@ export const Dialogs = (props: DialogsPropsType) => {
 
 
 
-    return (
-        <div className={classes.dialogs}>
-            <div className={classes.dialogsItems}>
-                <div className={classes.dialog}>
-
-                    {DialogElement}
-
-
-                </div>
-                <div className={classes.dialog}>
-
-                </div>
-
-            </div>
-            <div className={classes.messages}>
-                <div>{MessageElement}</div>
-
-                <textarea value={newMessageBody}
-                          onChange={onChangeMessageHandler}
-                          placeholder="Enter your message"
-                ></textarea>
-                <div>
-                    <button onClick={newMessageClickHandler}>Send</button>
-                </div>
-            </div>
-        </div>
-    )
-
+    return <Dialogs dialogsPage={state} updateNewMessageBody={onChangeMessageHandler} newMessageClicker={newMessageClicker}/>
 }
 

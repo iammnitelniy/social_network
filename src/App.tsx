@@ -18,6 +18,7 @@ import {
     StateType, StoreType
 } from "./redux/store";
 import {Sidebar} from "./components/Sidebar/Sidebar";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 
 type AppPropsType = {
@@ -58,7 +59,7 @@ const App = (props:AppPropsType) => {
 
                 <div className="app-wrapper-content">
                     <Route path='/dialogs'
-                           render={() => <Dialogs
+                           render={() => <DialogsContainer
 
                                store={props.store}
                                />}/>
