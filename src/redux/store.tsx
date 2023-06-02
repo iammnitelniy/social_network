@@ -14,7 +14,7 @@ export type StoreType = {
     // updateNewPostText: (newText: string) => void
     subscribe: (observer: (state: StateType) => void) => void
     // addMessage: (newMessage: MessageItemType) => void
-    // dispatch?: (action: ActionTypes) => void
+    dispatch?: (action: ActionTypes) => void
 
 }
 
