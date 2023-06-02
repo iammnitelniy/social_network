@@ -13,13 +13,14 @@ import './index.css';
 import App, {DialogItemType, MessageItemType} from './App';
 // import {addPost, subscribe, updateNewPostText} from "./redux/state";
 import {PostItemType} from "./components/Profile/Profile";
-import {store, StateType} from "./redux/state";
 import {BrowserRouter} from "react-router-dom";
+import {StateType} from "./redux/store";
+import store from "./redux/redux-store";
 
 
 
 
- let rerenderEntireTree = (state: StateType) => {
+ let rerenderEntireTree = (state: any) => {
 
 
 // addPost("Samuraijs.com")
@@ -37,4 +38,7 @@ import {BrowserRouter} from "react-router-dom";
 // updateNewPostText={store.updateNewPostText.bind(store)
 rerenderEntireTree(store.getState())
 
-store.subscribe(rerenderEntireTree)
+store.subscribe(()=> {
+    let state = store.getState()
+    rerenderEntireTree(state)
+})

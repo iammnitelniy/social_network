@@ -14,7 +14,7 @@ export type StoreType = {
     // updateNewPostText: (newText: string) => void
     subscribe: (observer: (state: StateType) => void) => void
     // addMessage: (newMessage: MessageItemType) => void
-    dispatch: (action: ActionTypes) => void
+    // dispatch?: (action: ActionTypes) => void
 
 }
 
@@ -172,6 +172,23 @@ export let store: StoreType = {
     _callSubscriber(state: StateType) {
         console.log("State has changed")
     },
+    subscribe(observer: any) {
+        this._callSubscriber = observer
+    },
+
+    // dispatch(action) {
+    //
+    //     this._state.profilePage = profileReducer(this._state.profilePage, action)
+    //     this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+    //     this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+    //
+    //     this._callSubscriber(this._state)
+    //
+    //
+    //
+    // }
+
+}
     // addPost() {
     //
     //     let newPost = {
@@ -193,9 +210,7 @@ export let store: StoreType = {
     //     this._callSubscriber(this._state)
     //
     // },
-    subscribe(observer: any) {
-        this._callSubscriber = observer
-    },
+
     // addMessage(newMessage: MessageItemType) {
     //
     //
@@ -205,19 +220,7 @@ export let store: StoreType = {
     //     this._callSubscriber(this._state)
     // },
 
-    dispatch(action) {
 
-        this._state.profilePage = profileReducer(this._state.profilePage, action)
-        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
-        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
-
-        this._callSubscriber(this._state)
-
-
-
-    }
-
-}
 // if (action.type === ADD_POST) {
 //     let newPost = {
 //         id: 5,

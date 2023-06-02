@@ -9,9 +9,10 @@ import {
     DialogsPageStateType,
     StoreType,
 
-} from "../../redux/state";
+} from "../../redux/store";
 import {useRef} from "react";
 import {sendMessageActionCreator, updateNewMessageBodyCreator} from "../../redux/dialogsReducer";
+import store from "../../redux/redux-store";
 
 
 
@@ -44,7 +45,7 @@ export const Dialogs = (props: DialogsPropsType) => {
 
 
     const newMessageClickHandler = (e:MouseEvent<HTMLButtonElement>) => {
-        props.store.dispatch(sendMessageActionCreator())
+        store.dispatch(sendMessageActionCreator())
 
 
 
@@ -54,7 +55,7 @@ export const Dialogs = (props: DialogsPropsType) => {
 
         let body =  e.currentTarget.value
 
-        props.store.dispatch(updateNewMessageBodyCreator(body))
+        store.dispatch(updateNewMessageBodyCreator(body))
 
 
     }

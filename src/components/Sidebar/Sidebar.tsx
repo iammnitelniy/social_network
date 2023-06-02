@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './Sidebar.module.css'
-import {SidebarStateType} from "../../redux/state";
+import {SidebarStateType} from "../../redux/store";
 
 type SidebarPropsType = {
     sidebar: Array<SidebarStateType>

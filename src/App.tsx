@@ -16,7 +16,7 @@ import {
     DialogsPageStateType,
     ProfilePageStateType,
     StateType, StoreType
-} from "./redux/state";
+} from "./redux/store";
 import {Sidebar} from "./components/Sidebar/Sidebar";
 
 
@@ -25,7 +25,7 @@ type AppPropsType = {
     addPost?: any
     updateNewPostText?: (newPost:string)=> void
     dispatch: (action: ActionTypes)=> void
-    store: StoreType
+    store: any
 
 
 }

@@ -1,12 +1,42 @@
-import {AddPostActionType, ChangeNewTextActionType} from "./state";
+import {AddPostActionType, ChangeNewTextActionType, ProfilePageStateType} from "./store";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST = 'UPDATE-NEW-POST-TEXT';
 
+let initialState:ProfilePageStateType = {
+    postData: [
+        {
+            id: 1,
+            content: "bow",
+            countLikes: 12,
+            countDislikes: 9
+        },
+        {
+            id: 2,
+            content: "wow",
+            countLikes: 5,
+            countDislikes: 1
+        },
+        {
+            id: 3,
+            content: "get",
+            countLikes: 7,
+            countDislikes: 3
+        },
+        {
+            id: 4,
+            content: "down",
+            countLikes: 9,
+            countDislikes: 0
+        }
 
 
+    ],
+    newPostText: ""
+}
 
- const profileReducer = (state: any, action: any) => {
+
+ const profileReducer = (state = initialState, action: allProfileActionsType) => {
 
      switch (action.type) {
          case ADD_POST:
@@ -30,6 +60,10 @@ const UPDATE_NEW_POST = 'UPDATE-NEW-POST-TEXT';
 
 }
 
+type allProfileActionsType = addPostACType | updateNewPostTextACType
+
+export type addPostACType = ReturnType<typeof addPostActionCreator>
+
 export const addPostActionCreator = (text: string): AddPostActionType => {
 
     return (
@@ -40,6 +74,8 @@ export const addPostActionCreator = (text: string): AddPostActionType => {
         }
     )
 }
+
+export type updateNewPostTextACType = ReturnType<typeof updateNewPostTextActionCreator>
 export const updateNewPostTextActionCreator = (newText: string): ChangeNewTextActionType => {
 
     return (

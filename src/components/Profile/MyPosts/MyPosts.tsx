@@ -7,7 +7,7 @@ import {MouseEvent} from "react";
 import {addPostActionCreator,
     updateNewPostTextActionCreator
 } from "../../../redux/profileReducer";
-import {ActionTypes} from "../../../redux/state";
+import {ActionTypes} from "../../../redux/store";
 
 
 
