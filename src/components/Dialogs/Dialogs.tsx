@@ -22,7 +22,7 @@ type DialogsPropsType = {
 
     updateNewMessageBody: (body: string)=> void
     // store: StoreType
-    dialogsPage: any
+    dialogsPage: DialogsPageStateType
     newMessageClicker: () => void
         //commit
         //commit2
