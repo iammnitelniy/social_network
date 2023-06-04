@@ -59,14 +59,10 @@ const App = (props:AppPropsType) => {
 
                 <div className="app-wrapper-content">
                     <Route path='/dialogs'
-                           render={() => <DialogsContainer
-
-                               store={props.store}
-                               />}/>
+                           render={() => <DialogsContainer/>}/>
                     <Route path='/profile'
                            render={() =>
-                    <Profile dispatch={props.dispatch} store={props.store}
-                             stateProfile={props.state.profilePage} addPost={props.addPost}/>}/>
+                    <Profile />}/>
                     <Sidebar sidebar={props.state.sidebar}/>
                     {/*<Route path='/news' component={News}/>*/}
                     {/*<Route path='/music' component={Music}/>*/}

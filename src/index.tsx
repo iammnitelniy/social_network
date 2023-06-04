@@ -16,6 +16,7 @@ import {PostItemType} from "./components/Profile/Profile";
 import {BrowserRouter} from "react-router-dom";
 import {StateType} from "./redux/store";
 import store from "./redux/redux-store";
+import {StoreContext} from "./StoreContext";
 
 
 
@@ -27,9 +28,9 @@ import store from "./redux/redux-store";
 
     ReactDOM.render(
         <BrowserRouter>
-
+            <StoreContext.Provider value={store}>
             <App state={state} dispatch={store.dispatch.bind(store)} store={store}  />
-
+            </StoreContext.Provider>
         </BrowserRouter>,
         document.getElementById('root')
     );

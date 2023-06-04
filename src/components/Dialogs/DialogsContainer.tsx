@@ -14,17 +14,15 @@ import {useRef} from "react";
 import {sendMessageActionCreator, updateNewMessageBodyCreator} from "../../redux/dialogsReducer";
 import store from "../../redux/redux-store";
 import {Dialogs} from "./Dialogs";
-
-
+import {StoreContext} from "../../StoreContext";
 
 
 type DialogsContainerPropsType = {
 
 
-
-    store: StoreType
-        //commit
-        //commit2
+    // store: StoreType
+    //commit
+    //commit2
     // state : Array<DialogItemType>
     // state : Array<MessageItemType>
 
@@ -34,34 +32,41 @@ type DialogsContainerPropsType = {
 export const DialogsContainer = (props: DialogsContainerPropsType) => {
 
 
-    let state = props.store.getState().dialogsPage
-
-    const DialogElement =
-        state.dialogsData.map((el) => <DialogItem key={el.id} id={el.id} name={el.name}/>)
-
-    const MessageElement =
-        state.messagesData.map((el) => <Message key={el.id} id={el.id}
-                                                             message={el.message}  />)
-    const newMessageBody = state.newMessageBody
-
-
-    const newMessageClicker = () => {
-        store.dispatch(sendMessageActionCreator())
 
 
 
-    }
+    return ( <StoreContext.Consumer>
+        {
+            (store: any) => {
+                let state = store.getState().dialogsPage
 
-    const onChangeMessageHandler= (body: string) => {
+                const DialogElement =
+                    state.dialogsData.map((el: DialogItemType) => <DialogItem key={el.id} id={el.id} name={el.name}/>)
+
+                const MessageElement =
+                    state.messagesData.map((el: MessageItemType) => <Message key={el.id} id={el.id}
+                                                            message={el.message}/>)
+                const newMessageBody = state.newMessageBody
 
 
-        store.dispatch(updateNewMessageBodyCreator(body))
+                const newMessageClicker = () => {
+                    store.dispatch(sendMessageActionCreator())
 
 
-    }
+                }
+
+                const onChangeMessageHandler = (body: string) => {
 
 
+                    store.dispatch(updateNewMessageBodyCreator(body))
 
-    return <Dialogs dialogsPage={state} updateNewMessageBody={onChangeMessageHandler} newMessageClicker={newMessageClicker}/>
+
+                }
+                return <Dialogs dialogsPage={state} updateNewMessageBody={onChangeMessageHandler}
+                         newMessageClicker={newMessageClicker}/>
+            }
+        }
+    </StoreContext.Consumer>
+    )
 }
 

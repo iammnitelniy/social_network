@@ -14,11 +14,8 @@ export type PostItemType = {
 }
 
 type ProfilePropsType = {
-    stateProfile: ProfilePageStateType
-    addPost?: any
-    updateNewPostText?: (newPost: string) => void
-    dispatch: (action: ActionTypes) => void
-    store: any
+
+
 
 
 }
@@ -31,7 +28,7 @@ export function Profile(props: ProfilePropsType) {
             <ProfileInfo/>
 
 
-            <MyPostsContainer  store={props.store} />
+            <MyPostsContainer  />
             {/*<MyPosts posts={props.stateProfile.postData} dispatch={props.dispatch} addPost={props.addPost}*/}
             {/*         newPostText={props.stateProfile.newPostText} updateNewPostText={props.updateNewPostText}/>*/}
 
