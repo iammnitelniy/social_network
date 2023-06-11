@@ -22,25 +22,23 @@ import {Provider} from "react-redux";
 
 
 
- let rerenderEntireTree = (state: any) => {
-
 
 // addPost("Samuraijs.com")
 //derfg
     ReactDOM.render(
         <BrowserRouter>
             <Provider store={store}>
-            <App state={state} dispatch={store.dispatch.bind(store)} store={store}  />
+            <App  dispatch={store.dispatch.bind(store)} store={store}  />
             </Provider>
         </BrowserRouter>,
         document.getElementById('root')
     );
-}
+
 
 // updateNewPostText={store.updateNewPostText.bind(store)
-rerenderEntireTree(store.getState())
+// rerenderEntireTree(store.getState())
 
-store.subscribe(()=> {
-    let state = store.getState()
-    rerenderEntireTree(state)
-})
+// store.subscribe(()=> {
+//     let state = store.getState()
+//     rerenderEntireTree(state)
+// })

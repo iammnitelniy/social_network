@@ -22,7 +22,6 @@ import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 
 type AppPropsType = {
-    state: StateType
     addPost?: any
     updateNewPostText?: (newPost:string)=> void
     dispatch: (action: ActionTypes)=> void
@@ -63,7 +62,7 @@ const App = (props:AppPropsType) => {
                     <Route path='/profile'
                            render={() =>
                     <Profile />}/>
-                    <Sidebar sidebar={props.state.sidebar}/>
+                    {/*<Sidebar sidebar={props.store.sidebar}/>*/}
                     {/*<Route path='/news' component={News}/>*/}
                     {/*<Route path='/music' component={Music}/>*/}
                     {/*<Route path='/settings' component={Settings}/>*/}
