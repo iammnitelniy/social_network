@@ -61,8 +61,8 @@ let initialState:DialogsPageStateType = {
 
      switch (action.type) {
          case UPDATE_NEW_MESSAGE_BODY:
-             state.newMessageBody = action.body
-             return state;
+
+             return {...state, newMessageBody: action.body}
          case SEND_MESSAGE:
              let body = state.newMessageBody
              state.newMessageBody = ""
@@ -70,7 +70,9 @@ let initialState:DialogsPageStateType = {
                  id: 3,
                  message: body,
              })
-             return state;
+
+
+             return {...state, messagesData: [...state.messagesData, {id: 3, message: state.newMessageBody}], newMessageBody: ""}
          default: return state
      }
 

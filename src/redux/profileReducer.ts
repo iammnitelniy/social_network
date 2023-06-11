@@ -48,12 +48,12 @@ let initialState:ProfilePageStateType = {
              }
 
 
-             state.postData.push(newPost)
-             state.newPostText = ""
-             return state
+             // state.postData.push(newPost)
+             // state.newPostText = ""
+             return {...state, postData: [newPost ,...state.postData], newPostText: ""}
          case UPDATE_NEW_POST:
              state.newPostText = action.newText
-             return state
+             return {...state, newPostText: action.newText}
          default: return state
      }
 
