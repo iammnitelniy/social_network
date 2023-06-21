@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Users = () => {
+export const UsersContsiner = () => {
     return (
         <div>
             Users will be here

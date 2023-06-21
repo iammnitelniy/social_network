@@ -19,6 +19,7 @@ import {
 } from "./redux/store";
 import {Sidebar} from "./components/Sidebar/Sidebar";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import {Users} from "./components/Users/Users";
 
 
 type AppPropsType = {
@@ -67,7 +68,7 @@ const App = (props:AppPropsType) => {
                     {/*<Route path='/music' component={Music}/>*/}
                     {/*<Route path='/settings' component={Settings}/>*/}
 
-                    <Route path={'/users'} render={()=><div>users</div>}/>
+                    <Route path={'/users'} render={()=><Users/>}/>
                 </div>
 
 
