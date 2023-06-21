@@ -66,6 +66,8 @@ const App = (props:AppPropsType) => {
                     {/*<Route path='/news' component={News}/>*/}
                     {/*<Route path='/music' component={Music}/>*/}
                     {/*<Route path='/settings' component={Settings}/>*/}
+
+                    <Route path={'/users'} render={()=><div>users</div>}/>
                 </div>
 
 
