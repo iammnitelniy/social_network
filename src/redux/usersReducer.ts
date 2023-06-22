@@ -4,7 +4,7 @@ const UNFOLLOW = 'UNFOLLOW USER'
 const SET_USERS = 'SET USERS'
 
 export type UserType =
-{id: number, followed: boolean, fullName: string, status: string, location: {city: string, country: string}}
+{id: number, photoUrl: string, followed: boolean, fullName: string, status: string, location: {city: string, country: string}}
 
 export type UsersType = {
     users: UserType[]
@@ -13,9 +13,9 @@ export type UsersType = {
 
 const initialState: UsersType = {
     users: [
-        {id: 1, followed: false, fullName: 'Dmitriy', status: 'top', location: {city: 'Minsk', country: 'Belarus'}},
-        {id: 2, followed: true, fullName: 'Dmitriy', status: 'top2', location: {city: 'Moscow', country: 'Russia'}},
-        {id: 3, followed: false, fullName: 'Dmitriy', status: 'top3', location: {city: 'Kiev', country: 'Ukraine'}}
+        {id: 1, photoUrl: 'https://pop.inquirer.net/files/2021/05/gigachad.jpg', followed: false, fullName: 'Dmitriy', status: 'top', location: {city: 'Minsk', country: 'Belarus'}},
+        {id: 2, photoUrl: 'https://pop.inquirer.net/files/2021/05/gigachad.jpg', followed: true, fullName: 'Dmitriy', status: 'top2', location: {city: 'Moscow', country: 'Russia'}},
+        {id: 3, photoUrl: 'https://pop.inquirer.net/files/2021/05/gigachad.jpg', followed: false, fullName: 'Dmitriy', status: 'top3', location: {city: 'Kiev', country: 'Ukraine'}}
     ]
 }
 
