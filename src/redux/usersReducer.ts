@@ -44,9 +44,9 @@ export const usersReducer = (state = initialState, action: TotalType) => {
 
 export type TotalType = FollowActionCreatorACType | UnFollowActionCreatorACType
 
-export type FollowActionCreatorACType = ReturnType<typeof followActionCreator>
+export type FollowActionCreatorACType = ReturnType<typeof followAC>
 
-export const followActionCreator = (userId: number) => {
+export const followAC = (userId: number) => {
     return(
         {
             type: FOLLOW,
@@ -57,9 +57,9 @@ export const followActionCreator = (userId: number) => {
     )
 }
 
-export type UnFollowActionCreatorACType = ReturnType<typeof unFollowActionCreator>
+export type UnFollowActionCreatorACType = ReturnType<typeof unFollowAC>
 
-export const unFollowActionCreator = (userId: number) => {
+export const unFollowAC = (userId: number) => {
     return(
         {
             type: UNFOLLOW,
@@ -69,9 +69,9 @@ export const unFollowActionCreator = (userId: number) => {
         }
     )
 }
-export type setUsersACType = ReturnType<typeof setUsersActionCreator>
+export type setUsersACType = ReturnType<typeof setUsersAC>
 
-export const setUsersActionCreator = (users: any) => {
+export const setUsersAC = (users: any) => {
     return(
         {
             type: SET_USERS,

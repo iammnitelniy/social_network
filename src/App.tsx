@@ -20,6 +20,7 @@ import {
 import {Sidebar} from "./components/Sidebar/Sidebar";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {Users} from "./components/Users/Users";
+import {UsersContainer} from "./components/Users/UsersContainer";
 
 
 type AppPropsType = {
@@ -68,7 +69,7 @@ const App = (props:AppPropsType) => {
                     {/*<Route path='/music' component={Music}/>*/}
                     {/*<Route path='/settings' component={Settings}/>*/}
 
-                    <Route path={'/users'} render={()=><Users/>}/>
+                    <Route path={'/users'} render={()=><UsersContainer/>}/>
                 </div>
 
 
