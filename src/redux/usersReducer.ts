@@ -12,11 +12,7 @@ export type UsersType = {
 
 
 const initialState: UsersType = {
-    users: [
-        {id: 1, photoUrl: 'https://pop.inquirer.net/files/2021/05/gigachad.jpg', followed: false, fullName: 'Dmitriy', status: 'top', location: {city: 'Minsk', country: 'Belarus'}},
-        {id: 2, photoUrl: 'https://pop.inquirer.net/files/2021/05/gigachad.jpg', followed: true, fullName: 'Dmitriy', status: 'top2', location: {city: 'Moscow', country: 'Russia'}},
-        {id: 3, photoUrl: 'https://pop.inquirer.net/files/2021/05/gigachad.jpg', followed: false, fullName: 'Dmitriy', status: 'top3', location: {city: 'Kiev', country: 'Ukraine'}}
-    ]
+    users: []
 }
 
 
@@ -35,14 +31,14 @@ export const usersReducer = (state = initialState, action: TotalType) => {
              return {...state, users: state.users.map(el=> el.id === action.payload.userId ? {...el, followed: false} : el)}
 
          case SET_USERS:
-             // return {...state, users: [...state.users, ...action.payload.users]}
+            return {...state, users: [...state.users, ...action.payload.users]}
 
          default: return state
      }
 
 }
-
-export type TotalType = FollowActionCreatorACType | UnFollowActionCreatorACType
+//comment
+export type TotalType = FollowActionCreatorACType | UnFollowActionCreatorACType | setUsersACType
 
 export type FollowActionCreatorACType = ReturnType<typeof followAC>
 
@@ -53,7 +49,7 @@ export const followAC = (userId: number) => {
             payload: {
                 userId
             }
-        }
+        } as const
     )
 }
 
@@ -66,19 +62,19 @@ export const unFollowAC = (userId: number) => {
             payload: {
                 userId
             }
-        }
+        } as const
     )
 }
 export type setUsersACType = ReturnType<typeof setUsersAC>
 
-export const setUsersAC = (users: any) => {
+export const setUsersAC = (users: UserType[]) => {
     return(
         {
             type: SET_USERS,
             payload: {
                 users
             }
-        }
+        } as const
     )
 }
 

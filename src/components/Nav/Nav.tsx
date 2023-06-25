@@ -15,6 +15,7 @@ export function Nav(props: NavPropsType) {
                 <div className={classes.item}><NavLink to="/news" activeClassName={classes.active}>{props.names[2]}</NavLink></div>
                 <div className={classes.item}><NavLink to="/music" activeClassName={classes.active}>{props.names[3]}</NavLink></div>
                 <div className={classes.item}><NavLink to="/settings" activeClassName={classes.active}>{props.names[4]}</NavLink></div>
+                <div className={classes.item}><NavLink to="/users" activeClassName={classes.active}>{props.names[5]}</NavLink></div>
 
 
 

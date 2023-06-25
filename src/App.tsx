@@ -20,7 +20,8 @@ import {
 import {Sidebar} from "./components/Sidebar/Sidebar";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {Users} from "./components/Users/Users";
-import {UsersContainer} from "./components/Users/UsersContainer";
+import UsersContainer from "./components/Users/UsersContainer";
+
 
 
 type AppPropsType = {
@@ -47,7 +48,7 @@ const App = (props:AppPropsType) => {
 
     // const arrayHeader = ["Home ", "News Feed ", "Messages "]
     // const technologiesNames = ["bow ", "wow ", "wow "]
-    const navbarNames = ["Profile", "Messages", "News", "Music", "Settings"]
+    const navbarNames = ["Profile", "Messages", "News", "Music", "Settings", "Users"]
     return (
         <BrowserRouter>
             <div className='app-wrapper'>

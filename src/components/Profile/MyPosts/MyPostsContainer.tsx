@@ -1,19 +1,11 @@
-import React, {ChangeEvent} from 'react';
-import classes from './MyPosts.module.css'
-import {Post} from "./Post/Post";
-import {PostItemType} from "../Profile";
-import {useRef} from "react";
-import {MouseEvent} from "react";
+import React from 'react';
 import {addPostActionCreator,
     updateNewPostTextActionCreator
 } from "../../../redux/profileReducer";
-import {ActionTypes} from "../../../redux/store";
 import {MyPosts} from "./MyPosts";
 
-import store from "../../../redux/redux-store";
-import {sendMessageActionCreator, updateNewMessageBodyCreator} from "../../../redux/dialogsReducer";
 import {connect} from "react-redux";
-import {Dialogs} from "../../Dialogs/Dialogs";
+
 
 
 
