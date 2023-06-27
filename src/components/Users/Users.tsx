@@ -1,15 +1,15 @@
 import React from 'react';
 import styles from './Users.module.css'
+import axios from "axios";
 
 
 
 export const Users = (props: any) => {
 
-        if (props.users.length === 0)
-    props.setUsers(
-        [{id: 1, photoUrl: 'https://pop.inquirer.net/files/2021/05/gigachad.jpg', followed: false, fullName: 'Dmitriy', status: 'top', location: {city: 'Minsk', country: 'Belarus'}},
-        {id: 2, photoUrl: 'https://pop.inquirer.net/files/2021/05/gigachad.jpg', followed: true, fullName: 'Dmitriy', status: 'top2', location: {city: 'Moscow', country: 'Russia'}},
-        {id: 3, photoUrl: 'https://pop.inquirer.net/files/2021/05/gigachad.jpg', followed: false, fullName: 'Dmitriy', status: 'top3', location: {city: 'Kiev', country: 'Ukraine'}}])
+        if (props.users.length === 0) {
+            axios.get('https://social-network.samuraijs.com/api/1.0')
+        }
+
 
 
 
