@@ -19,18 +19,20 @@ const initialState: UsersType = {
 
 
 
-export const usersReducer = (state = initialState, action: TotalType) => {
+export const usersReducer = (state=initialState, action: TotalType) => {
 
 
      switch (action.type) {
          case FOLLOW:
 
-             return {...state, users: state.users.map(el=> el.id === action.payload.userId ? {...el, followed: true} : el)}
+             return {...state, users: state.users.map((el: any)=> el.id === action.payload.userId ? {...el, followed: true} : el)}
 
          case UNFOLLOW:
-             return {...state, users: state.users.map(el=> el.id === action.payload.userId ? {...el, followed: false} : el)}
+             return {...state, users: state.users.map((el: any)=> el.id === action.payload.userId ? {...el, followed: false} : el)}
 
          case SET_USERS:
+             debugger
+             console.log(action.payload.users)
             return {...state, users: [...state.users, ...action.payload.users]}
 
          default: return state
@@ -65,9 +67,9 @@ export const unFollowAC = (userId: number) => {
         } as const
     )
 }
-export type setUsersACType = ReturnType<typeof setUsersAC>
+export type setUsersACType = ReturnType<typeof SetUsersAC>
 
-export const setUsersAC = (users: UserType[]) => {
+export const SetUsersAC = (users: any) => {
     return(
         {
             type: SET_USERS,

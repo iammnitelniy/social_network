@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './Users.module.css'
 import axios from "axios";
 
@@ -6,9 +6,22 @@ import axios from "axios";
 
 export const Users = (props: any) => {
 
-        if (props.users.length === 0) {
-            axios.get('https://social-network.samuraijs.com/api/1.0')
-        }
+    useEffect(() => {
+        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+            .then(res => {
+                props.setUsers(res.data.items)
+                console.log(res.data.items)
+            })
+
+    }, [])
+
+
+        // if (props.users?.length === 0) {
+        //     axios.get('https://social-network.samuraijs.com/api/1.0/users')
+        //         .then(res => {
+        //         props.setUsers(res.data.items)
+        //     })
+        // }
 
 
 
@@ -25,11 +38,18 @@ const onClickFollowHandler = (id: number) => {
 
     return (
         <div>
-            {props.users.map((u: any)=><div key={u.id}>
+            Users:
+            {props.users?.items[0].name}
 
 
-                        {u.followed ? <button onClick={()=>onClickUnfollowHandler(u.id)}>Unfollow</button> : <button onClick={()=>onClickFollowHandler(u.id)}>Follow</button>}
-                        <img src={u.photoUrl} className={styles.userPhoto}/>
+
+
+
+            {props.users?.map((u: any)=><div key={u.id}>
+
+
+                        <button onClick={()=>onClickUnfollowHandler(u.id)}>Unfollow</button> <button onClick={()=>onClickFollowHandler(u.id)}>Follow</button>
+                        <img src={u.photos.small != null ? u.photos.small : "https://img.freepik.com/free-icon/user_318-159711.jpg"} className={styles.userPhoto}/>
 
 
 
