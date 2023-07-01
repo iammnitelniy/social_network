@@ -1,12 +1,14 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './Users.module.css'
 import axios from "axios";
 
 
-
 export const Users = (props: any) => {
 
+
     useEffect(() => {
+
+
         axios.get('https://social-network.samuraijs.com/api/1.0/users')
             .then(res => {
                 props.setUsers(res.data.items)
@@ -16,51 +18,53 @@ export const Users = (props: any) => {
     }, [])
 
 
-        // if (props.users?.length === 0) {
-        //     axios.get('https://social-network.samuraijs.com/api/1.0/users')
-        //         .then(res => {
-        //         props.setUsers(res.data.items)
-        //     })
-        // }
+    // if (props.users?.length === 0) {
+    //     axios.get('https://social-network.samuraijs.com/api/1.0/users')
+    //         .then(res => {
+    //         props.setUsers(res.data.items)
+    //     })
+    // }
 
 
+    const onClickUnfollowHandler = (id: number) => {
+        props.unfollow(id)
+    }
+    const onClickFollowHandler = (id: number) => {
+        props.follow(id)
+    }
 
-
-
-const onClickUnfollowHandler = (id: number) => {
-    props.unfollow(id)
-}
-const onClickFollowHandler = (id: number) => {
-    props.follow(id)
-}
-
+    const callbackHandler = () => {
+        console.log(props.users.users[0].name)
+    }
 
 
     return (
         <div>
-            Users:
-            {props.users?.items[0].name}
 
 
+            {props.users.users?.map((u: any) => <div key={u.id}>
+                <div>
 
+                    <div>
+                        <img
+                            src={u.photos.small != null ? u.photos.small : "https://img.freepik.com/free-icon/user_318-159711.jpg"}
+                            className={styles.userPhoto}/>
 
+                    </div>
 
-            {props.users?.map((u: any)=><div key={u.id}>
+                    {u.followed ? <button onClick={() => onClickUnfollowHandler(u.id)}>Unfollow</button> :
+                        <button onClick={() => onClickFollowHandler(u.id)}>Follow</button>}
 
-
-                        <button onClick={()=>onClickUnfollowHandler(u.id)}>Unfollow</button> <button onClick={()=>onClickFollowHandler(u.id)}>Follow</button>
-                        <img src={u.photos.small != null ? u.photos.small : "https://img.freepik.com/free-icon/user_318-159711.jpg"} className={styles.userPhoto}/>
-
-
-
+                    <div></div>
+                </div>
                 <span>
                     <span>
-                        <div>u.fullName</div>
-                        <div>u.status</div>
+                        <div>{u.name}</div>
+                        <div>{u.status}</div>
 
                     </span>
                     <span>
-                        <div>u.location.country</div>
+                        <div>{u.followed}</div>
                         <div>u.location.city</div>
 
                     </span>
@@ -69,8 +73,6 @@ const onClickFollowHandler = (id: number) => {
 
 
                 </span>
-
-
 
 
             </div>)}

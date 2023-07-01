@@ -20,7 +20,6 @@ import {followAC, SetUsersAC, unFollowAC} from "../../redux/usersReducer";
             },
             setUsers: (users: any) => {
                 dispatch(SetUsersAC(users))
-                debugger
                 console.log(users)
             }
         }

@@ -3,8 +3,23 @@ const FOLLOW = 'FOLLOW USER'
 const UNFOLLOW = 'UNFOLLOW USER'
 const SET_USERS = 'SET USERS'
 
+// export type UserType =
+// {id: number, photoUrl: string, followed: boolean, fullName: string, status: string, location: {city: string, country: string}}
+
+
 export type UserType =
-{id: number, photoUrl: string, followed: boolean, fullName: string, status: string, location: {city: string, country: string}}
+    {
+        "name": string,
+        "id": number,
+        "uniqueUrlName": null | string,
+        "photos": {
+            "small": null | "string",
+            "large": null | 'string'
+        },
+        "status": null | boolean,
+        "followed": boolean
+    }
+
 
 export type UsersType = {
     users: UserType[]
@@ -19,7 +34,7 @@ const initialState: UsersType = {
 
 
 
-export const usersReducer = (state=initialState, action: TotalType) => {
+export const usersReducer = (state = initialState, action: TotalType) => {
 
 
      switch (action.type) {
@@ -31,7 +46,6 @@ export const usersReducer = (state=initialState, action: TotalType) => {
              return {...state, users: state.users.map((el: any)=> el.id === action.payload.userId ? {...el, followed: false} : el)}
 
          case SET_USERS:
-             debugger
              console.log(action.payload.users)
             return {...state, users: [...state.users, ...action.payload.users]}
 
