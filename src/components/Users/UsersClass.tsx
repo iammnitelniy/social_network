@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import styles from './Users.module.css'
+import s from './UsersClass.module.css'
 import axios from "axios";
 import {UsersClassProps} from "./UsersContainer";
 
@@ -31,7 +31,7 @@ class Users extends React.Component<UsersClassProps, State> {
 
 
     componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+        axios.get('https://social-network.samuraijs.com/api/1.0/users?page=')
             .then(response => {
                 this.props.setUsers(response.data.items)
                 console.log(response.data.items)
@@ -40,10 +40,29 @@ class Users extends React.Component<UsersClassProps, State> {
 
 
     render() {
+
+        let pagesCount: number = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
+
+        let pages: number[] = []
+        for (let i = 1; i <= pagesCount; i++) {
+                pages.push(i)
+        }
+
+        console.log(pages)
+
         return (
             <div>
-                {Array.isArray(this.props.users) ? (
-                    this.props.users.map(u => (
+                <div>
+
+
+                    {pages.map((el) => {return <span className={Number(this.props.currentPage) === el ? s.selectedPage : ""}>{el}</span>})}
+
+                </div>
+
+
+
+
+                { this.props.users.map(u => (
                         <div key={u.id}>
                             <div>
                                 <div>
@@ -53,7 +72,7 @@ class Users extends React.Component<UsersClassProps, State> {
                                                 ? u.photos.small
                                                 : 'https://img.freepik.com/free-icon/user_318-159711.jpg'
                                         }
-                                        className={styles.userPhoto}
+                                        className={s.userPhoto}
                                     />
                                 </div>
                                 {u.followed ? (
@@ -75,9 +94,7 @@ class Users extends React.Component<UsersClassProps, State> {
               </span>
                         </div>
                     ))
-                ) : (
-                    <div>No users found.</div>
-                )}
+                }
             </div>
         );
     }

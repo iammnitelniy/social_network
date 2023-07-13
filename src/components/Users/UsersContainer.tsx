@@ -9,7 +9,10 @@ import {AppStateType} from "../../redux/redux-store";
  const mapStateToProps = (state: AppStateType) => {
 
     return {
-         users: state.users.users
+         users: state.users.users,
+        pageSize: state.users.pageSize,
+        totalUsersCount: state.users.totalUsersCount,
+        currentPage: state.users.currentPage
      }
 
 };

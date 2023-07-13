@@ -23,11 +23,18 @@ export type UserType =
 
 export type UsersType = {
     users: UserType[]
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 
 const initialState: UsersType = {
-    users: []
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 50,
+    currentPage: 5
+
 }
 
 
