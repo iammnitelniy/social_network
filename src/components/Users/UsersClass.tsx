@@ -29,24 +29,20 @@ interface State {
 
 class Users extends React.Component<UsersClassProps, State> {
 
-    getUsers = () => {
-        console.log(this.props.users)
-        if (this.props.users.length === 0) {
-            debugger
-            axios.get('https://social-network.samuraijs.com/api/1.0/users')
-                .then(response => {
-                    this.props.setUsers(response.data.items)
-                    console.log(response.data.items)
-                })
 
-        }
+    componentDidMount() {
+        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+            .then(response => {
+                this.props.setUsers(response.data.items)
+                console.log(response.data.items)
+            })
     }
+
 
     render() {
         return (
             <div>
-                <button onClick={this.getUsers}>Get Users</button>
-                {Array.isArray(this.props.users) && this.props.users.length > 0 ? (
+                {Array.isArray(this.props.users) ? (
                     this.props.users.map(u => (
                         <div key={u.id}>
                             <div>
@@ -74,7 +70,7 @@ class Users extends React.Component<UsersClassProps, State> {
                 </span>
                 <span>
                   <div>{u.followed}</div>
-                  <div></div>
+                  <div>{u.uniqueUrlName}</div>
                 </span>
               </span>
                         </div>
