@@ -5,6 +5,7 @@ import {followAC, SetCurrentPageAC, SetTotalUsersCountAC, SetUsersAC, unFollowAC
 import UsersClass from "./UsersClass";
 import {Dispatch} from "redux";
 import {AppStateType} from "../../redux/redux-store";
+import UsersAPIComponent from "./UsersAPIComponent";
 
  const mapStateToProps = (state: AppStateType) => {
 
@@ -44,4 +45,4 @@ import {AppStateType} from "../../redux/redux-store";
 export type UsersClassProps = ReturnType<typeof mapDispatchToProps> & ReturnType<typeof mapStateToProps>
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersClass)
+export default connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent)
