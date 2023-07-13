@@ -9,10 +9,11 @@ let reducers = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer,
-    users:usersReducer,
+    users: usersReducer,
 })
 
 let store = createStore(reducers)
 
+export type AppStateType = ReturnType<typeof store.getState>
 
 export default store

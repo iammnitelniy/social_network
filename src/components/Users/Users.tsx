@@ -33,9 +33,7 @@ export const Users = (props: any) => {
         props.follow(id)
     }
 
-    const callbackHandler = () => {
-        console.log(props.users.users[0].name)
-    }
+
 
 
     return (
