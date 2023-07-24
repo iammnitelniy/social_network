@@ -19,7 +19,7 @@ import {
 } from "./redux/store";
 import {Sidebar} from "./components/Sidebar/Sidebar";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
-import {Users} from "./components/Users/Users";
+
 import UsersContainer from "./components/Users/UsersContainer";
 
 

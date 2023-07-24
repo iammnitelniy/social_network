@@ -20,7 +20,7 @@ interface State {
 }
 
 
-class UsersAPIComponent extends React.Component<UsersClassProps, State> {
+class UsersContainer extends React.Component<UsersClassProps, State> {
 
 
     componentDidMount() {
@@ -105,4 +105,12 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 export type UsersClassProps = ReturnType<typeof mapDispatchToProps> & ReturnType<typeof mapStateToProps>
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent)
+export default connect(mapStateToProps, {
+        follow: followAC,
+        unfollow: unFollowAC,
+        setUsers: SetUsersAC,
+        setCurrentPage: SetCurrentPageAC,
+        setTotalUsersCount: SetTotalUsersCountAC,
+        setToggleIsFetching: SetIsFetchingAC
+    }
+    )(UsersContainer)

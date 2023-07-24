@@ -3,7 +3,7 @@ import styles from './UsersClass.module.css'
 import axios from "axios";
 
 
-export const Users = (props: any) => {
+export const UsersUseEffect = (props: any) => {
 
 
     useEffect(() => {
