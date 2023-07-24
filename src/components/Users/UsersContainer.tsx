@@ -14,7 +14,7 @@ import {AppStateType} from "../../redux/redux-store";
 
 import axios from "axios";
 import UsersFunctional from "./UsersFunctional";
-import preloader from './../../assets/images/preloader.gif'
+import Preloader from "../Preloader/Preloader";
 
 interface State {
 }
@@ -54,7 +54,7 @@ class UsersAPIComponent extends React.Component<UsersClassProps, State> {
         return (
 
             <>
-                {this.props.isFetching && <img src={preloader}/>}
+                {this.props.isFetching && <Preloader />}
                 <UsersFunctional unfollow={this.props.unfollow} follow={this.props.follow} users={this.props.users}
                                  currentPage={this.props.currentPage} pageSize={this.props.pageSize}
                                  totalUsersCount={this.props.totalUsersCount} onPageChanged={this.onPageChanged}/>
