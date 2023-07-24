@@ -4,6 +4,7 @@ const UNFOLLOW = 'UNFOLLOW USER'
 const SET_USERS = 'SET USERS'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 
 // export type UserType =
 // {id: number, photoUrl: string, followed: boolean, fullName: string, status: string, location: {city: string, country: string}}
@@ -28,6 +29,8 @@ export type UsersType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
+
 }
 
 
@@ -35,7 +38,8 @@ const initialState: UsersType = {
     users: [],
     pageSize: 5,
     totalUsersCount: 0,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: false
 
 }
 
@@ -59,17 +63,19 @@ export const usersReducer = (state = initialState, action: TotalType): UsersType
 
          case SET_CURRENT_PAGE:
             return {...state, currentPage: action.payload.currentPage}
-         case
-         SET_TOTAL_USERS_COUNT:
-             // console.log(action.payload.totalCount)
+         case SET_TOTAL_USERS_COUNT:
+
             return {...state, totalUsersCount: action.payload.totalCount / 100}
+         case TOGGLE_IS_FETCHING:
+
+            return {...state, isFetching: action.payload.isFetching}
 
          default: return state
      }
 
 }
 //comment
-export type TotalType = FollowActionCreatorACType | UnFollowActionCreatorACType | setUsersACType | setCurrentPageACType | SetTotalUsersCountACType
+export type TotalType = FollowActionCreatorACType | UnFollowActionCreatorACType | setUsersACType | setCurrentPageACType | SetTotalUsersCountACType | SetIsFetchingACType
 
 export type FollowActionCreatorACType = ReturnType<typeof followAC>
 
@@ -128,6 +134,19 @@ export const SetTotalUsersCountAC = (totalCount: number) => {
             type: SET_TOTAL_USERS_COUNT,
             payload: {
                 totalCount
+            }
+        } as const
+    )
+}
+
+export type SetIsFetchingACType = ReturnType<typeof SetIsFetchingAC>
+
+export const SetIsFetchingAC = (isFetching: boolean) => {
+    return(
+        {
+            type: TOGGLE_IS_FETCHING,
+            payload: {
+                isFetching
             }
         } as const
     )
