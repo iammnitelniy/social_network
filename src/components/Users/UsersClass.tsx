@@ -42,7 +42,7 @@ class Users extends React.Component<UsersClassProps, State> {
 
 
     onPageChanged = (pageNumber: number) => {
-              this.props.setCurrentPage(pageNumber)
+        this.props.setCurrentPage(pageNumber)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
             .then(response => {
                 this.props.setUsers(response.data.items)
@@ -56,9 +56,8 @@ class Users extends React.Component<UsersClassProps, State> {
 
         let pages: number[] = []
         for (let i = 1; i <= pagesCount; i++) {
-                pages.push(i)
+            pages.push(i)
         }
-
 
 
         return (
@@ -66,34 +65,36 @@ class Users extends React.Component<UsersClassProps, State> {
                 <div>
 
 
-                    {pages.map((el, index) => {return <span key={index} onClick={(e) => {this.onPageChanged(el)}} className={Number(this.props.currentPage) === el ? s.selectedPage : ""}>{el}</span>})}
+                    {pages.map((el, index) => {
+                        return <span key={index} onClick={(e) => {
+                            this.onPageChanged(el)
+                        }} className={Number(this.props.currentPage) === el ? s.selectedPage : ""}>{el}</span>
+                    })}
 
                 </div>
 
 
-
-
-                { this.props?.users.map(u => (
-                        <div key={u.id}>
+                {this.props?.users.map(u => (
+                    <div key={u.id}>
+                        <div>
                             <div>
-                                <div>
-                                    <img
-                                        src={
-                                            u.photos?.small != null
-                                                ? u.photos.small
-                                                : 'https://img.freepik.com/free-icon/user_318-159711.jpg'
-                                        }
-                                        className={s.userPhoto}
-                                    />
-                                </div>
-                                {u.followed ? (
-                                    <button onClick={() => this.props.unfollow(u.id)}>Unfollow</button>
-                                ) : (
-                                    <button onClick={() => this.props.follow(u.id)}>Follow</button>
-                                )}
-                                <div></div>
+                                <img
+                                    src={
+                                        u.photos?.small != null
+                                            ? u.photos.small
+                                            : 'https://img.freepik.com/free-icon/user_318-159711.jpg'
+                                    }
+                                    className={s.userPhoto}
+                                />
                             </div>
-                            <span>
+                            {u.followed ? (
+                                <button onClick={() => this.props.unfollow(u.id)}>Unfollow</button>
+                            ) : (
+                                <button onClick={() => this.props.follow(u.id)}>Follow</button>
+                            )}
+                            <div></div>
+                        </div>
+                        <span>
                 <span>
                   <div>{u.name}</div>
                   <div>{u.status}</div>
@@ -103,8 +104,8 @@ class Users extends React.Component<UsersClassProps, State> {
                   <div>{u.uniqueUrlName}</div>
                 </span>
               </span>
-                        </div>
-                    ))
+                    </div>
+                ))
                 }
             </div>
         );

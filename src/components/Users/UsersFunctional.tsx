@@ -1,6 +1,7 @@
 import React from 'react';
 import s from "./UsersClass.module.css";
 import {UserType} from "../../redux/usersReducer";
+import {NavLink} from "react-router-dom";
 
 
 export type UsersFunctionalPropsType = {
@@ -40,6 +41,7 @@ const UsersFunctional = (props: UsersFunctionalPropsType) => {
                     <div key={u.id}>
                         <div>
                             <div>
+                                <NavLink to={'/profile/' + u.id}>
                                 <img
                                     src={
                                         u.photos?.small != null
@@ -48,6 +50,7 @@ const UsersFunctional = (props: UsersFunctionalPropsType) => {
                                     }
                                     className={s.userPhoto}
                                 />
+                                </NavLink>
                             </div>
                             {u.followed ? (
                                 <button onClick={() => props.unfollow(u.id)}>Unfollow</button>
