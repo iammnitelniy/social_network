@@ -21,6 +21,7 @@ import {Sidebar} from "./components/Sidebar/Sidebar";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 import UsersContainer from "./components/Users/UsersContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 
 
@@ -64,7 +65,7 @@ const App = (props:AppPropsType) => {
                            render={() => <DialogsContainer/>}/>
                     <Route path='/profile'
                            render={() =>
-                    <Profile />}/>
+                    <ProfileContainer />}/>
                     {/*<Sidebar sidebar={props.store.sidebar}/>*/}
                     {/*<Route path='/news' component={News}/>*/}
                     {/*<Route path='/music' component={Music}/>*/}
