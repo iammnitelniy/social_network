@@ -44,7 +44,8 @@ export type ActionTypes = AddPostActionType | ChangeNewTextActionType | AddNewMe
 
 export type ProfilePageStateType = {
     postData: Array<PostItemType>
-    newPostText: string
+    newPostText: string,
+    profile: any
 }
 export type DialogsPageStateType = {
     dialogsData: Array<DialogItemType>
@@ -101,7 +102,8 @@ export let store: StoreType = {
 
 
             ],
-            newPostText: ""
+            newPostText: "",
+            profile: null
         },
         dialogsPage: {
             dialogsData: [

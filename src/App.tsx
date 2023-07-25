@@ -1,23 +1,17 @@
 import React from 'react';
 import './App.css';
-import Technologies from "./Technologies"
 import {Header} from "./components/Header/Header";
 import {Nav} from "./components/Nav/Nav";
-import {PostItemType, Profile} from "./components/Profile/Profile";
-import {Dialogs} from "./components/Dialogs/Dialogs";
+
 import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {
     ActionTypes,
-    AddPostActionType,
-    ChangeNewTextActionType,
-    DialogsPageStateType,
-    ProfilePageStateType,
-    StateType, StoreType
+
 } from "./redux/store";
-import {Sidebar} from "./components/Sidebar/Sidebar";
+
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 import UsersContainer from "./components/Users/UsersContainer";
@@ -63,7 +57,7 @@ const App = (props:AppPropsType) => {
                 <div className="app-wrapper-content">
                     <Route path='/dialogs'
                            render={() => <DialogsContainer/>}/>
-                    <Route path='/profile'
+                    <Route path='/profile*'
                            render={() =>
                     <ProfileContainer />}/>
                     {/*<Sidebar sidebar={props.store.sidebar}/>*/}

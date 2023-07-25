@@ -4,6 +4,7 @@ import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {ActionTypes, AddPostActionType, ChangeNewTextActionType, ProfilePageStateType} from "../../redux/store";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
+import {ProfileFromAPIType} from "./ProfileContainer";
 
 
 export type PostItemType = {
@@ -13,9 +14,11 @@ export type PostItemType = {
     countDislikes: number
 }
 
+
+
 type ProfilePropsType = {
 
-
+profile: ProfileFromAPIType
 
 
 }
@@ -25,7 +28,7 @@ export function Profile(props: ProfilePropsType) {
     return (
         <div>
 
-            <ProfileInfo/>
+            <ProfileInfo profile={props.profile}/>
 
 
             <MyPostsContainer  />
