@@ -3,6 +3,7 @@ import s from "./UsersClass.module.css";
 import {UserType} from "../../redux/usersReducer";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
+import {usersAPI} from "../../api/usersAPI";
 
 
 export type UsersFunctionalPropsType = {
@@ -57,7 +58,7 @@ const UsersFunctional = (props: UsersFunctionalPropsType) => {
                                 <button onClick={() => {
 
 
-                                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {withCredentials: true})
+                                   usersAPI.deleteUser(u.id)
                                         .then(res => {
                                                 if (res.data.resultCode === 0) {
                                                     props.unfollow(u.id)
@@ -73,8 +74,8 @@ const UsersFunctional = (props: UsersFunctionalPropsType) => {
                             ) : (
                                 <button onClick={() => {
 
+                                    usersAPI.setUser(u.id)
 
-                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {withCredentials: true})
                                         .then(res => {
                                                 if (res.data.resultCode === 0) {
                                                     props.follow(u.id)
