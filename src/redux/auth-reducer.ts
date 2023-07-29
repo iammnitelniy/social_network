@@ -2,10 +2,23 @@
 
 const SET_USER_DATE = 'SET_USER_DATE'
 
+
+export type ResponseUserType = {
+    "data": {
+    "id": number,
+        "login": string,
+        "email": string
+},
+    "messages": string[]
+    "resultCode": number
+}
+
+
 type initialStateType = {
-    userId: null | string
+    userId: null | number
     email: null | string
     login: null | string
+    isAuth: boolean
 
 }
 
@@ -13,7 +26,8 @@ type initialStateType = {
 const initialState = {
     userId: null,
     email: null,
-    login: null
+    login: null,
+    isAuth: false
 
 }
 
@@ -26,7 +40,10 @@ export const authReducer = (state = initialState, action: TotalType): initialSta
 
      switch (action.type) {
          case SET_USER_DATE:
-                return action.data
+             debugger
+             console.log(action.data)
+                return {...state, userId: action.data.data.id, email: action.data.data.email, login: action.data.data.login, isAuth: true}
+
 
 
 
@@ -37,17 +54,15 @@ export const authReducer = (state = initialState, action: TotalType): initialSta
 
 }
 //comment
-export type TotalType =
+export type TotalType =  setUserACType
 
-export type FollowActionCreatorACType = ReturnType<typeof followAC>
+export type setUserACType = ReturnType<typeof setAuthUserAC>
 
-export const followAC = (userId: number) => {
+export const setAuthUserAC = (data: ResponseUserType) => {
     return(
         {
-            type: FOLLOW,
-            payload: {
-                userId
-            }
+            type: SET_USER_DATE,
+            data
         } as const
     )
 }

@@ -1,7 +1,18 @@
 .header {
     grid-area: h;
     background-color: green;
+    display: flex;
+    justify-content: space-between;
+
 }
 .header img {
     width: 100px;
+    height: 100%;
 }
+
+.loginBlock a {
+    color: cornsilk;
+    text-decoration: none;
+}
+
+
