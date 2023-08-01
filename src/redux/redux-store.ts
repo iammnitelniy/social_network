@@ -1,9 +1,11 @@
-import {combineReducers, createStore} from "redux";
+import {AnyAction, applyMiddleware, combineReducers, createStore} from "redux";
 import profileReducer from "./profileReducer";
 import dialogsReducer from "./dialogsReducer";
 import sidebarReducer from "./sidebarReducer";
 import {usersReducer} from "./usersReducer";
 import {authReducer} from "./auth-reducer";
+import thunkMiddleware, {ThunkAction, ThunkDispatch} from "redux-thunk";
+import {useDispatch} from "react-redux";
 
 
 let reducers = combineReducers({
@@ -14,8 +16,12 @@ let reducers = combineReducers({
     auth: authReducer
 })
 
-let store = createStore(reducers)
+export const store = createStore(reducers, applyMiddleware(thunkMiddleware))
 
-export type AppStateType = ReturnType<typeof store.getState>
+export type AppStateType = ReturnType<typeof reducers>
 
-export default store
+type AppDispatchType = ThunkDispatch<AppStateType, unknown, AnyAction>
+export const useAppDispatch = useDispatch
+// а это, чтобы можно было в консоли браузера обращаться к store в любой момент
+// @ts-ignore
+window.store = store;

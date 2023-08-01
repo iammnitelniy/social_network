@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {
-    followAC,
+    followAC, getUsersTC,
     SetCurrentPageAC,
     SetIsFetchingAC,
     SetTotalUsersCountAC,
@@ -23,19 +23,18 @@ interface State {
 
 //update
 
+
+dispatch =
+
 class UsersContainer extends React.Component<UsersClassProps, State> {
 
 
     componentDidMount() {
-        this.props.setToggleIsFetching(true)
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-            .then(data => {
-                this.props.setToggleIsFetching(false)
-                this.props.setUsers(data.items)
-                this.props.setTotalUsersCount(data.totalCount)
-                console.log(data.totalCount)
 
-            })
+     dispatch(getUsersTC(this.props.currentPage, this.props.pageSize))
+
+
+
     }
 
 
