@@ -105,8 +105,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
         setToggleIsFetching: (isFetching: boolean) => {
             dispatch(SetIsFetchingAC(isFetching))
         },
-        setToggleIsFollowing: (isFollowing: boolean) => {
-            dispatch(ToggleFollowingProgressAC(isFollowing))
+        setToggleIsFollowing: (isFollowing: boolean, id: number) => {
+            dispatch(ToggleFollowingProgressAC(isFollowing, id))
         }
     }
 

@@ -59,13 +59,13 @@ const UsersFunctional = (props: UsersFunctionalPropsType) => {
                             {u.followed ? (
                                 <button onClick={() => {
 
-                                    props.setToggleIsFollowing(true, u.id)
+                                    props.setToggleIsFollowing(false, u.id)
                                    usersAPI.deleteUser(u.id)
                                         .then(res => {
                                                 if (res.data.resultCode === 0) {
                                                     props.unfollow(u.id)
                                                 }
-                                            props.setToggleIsFollowing(false, u.id)
+                                            props.setToggleIsFollowing(true, u.id)
 
                                             }
                                         )
@@ -75,8 +75,8 @@ const UsersFunctional = (props: UsersFunctionalPropsType) => {
                                 }
                                 }>Unfollow</button>
                             ) : (
-                                <button disabled={props.followingInProgress.some(id => id === u.id) onClick={() => {
-                                    props.setToggleIsFollowing(true)
+                                <button disabled={props.followingInProgress.some((id: number) => id === u.id)} onClick={() => {
+                                    props.setToggleIsFollowing(false, u.id)
 
                                     usersAPI.setUser(u.id)
 
@@ -84,7 +84,7 @@ const UsersFunctional = (props: UsersFunctionalPropsType) => {
                                                 if (res.data.resultCode === 0) {
                                                     props.follow(u.id)
                                                 }
-                                            props.setToggleIsFollowing(false)
+                                            props.setToggleIsFollowing(true, u.id)
 
                                             }
                                         )

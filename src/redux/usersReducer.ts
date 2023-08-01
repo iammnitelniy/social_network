@@ -74,15 +74,15 @@ export const usersReducer = (state = initialState, action: TotalType): UsersType
         case TOGGLE_IS_FETCHING:
 
             return {...state, isFetching: action.payload.isFetching}
+
+
         case TOGGLE_IS_FOLLOWING_PROGRESS:
 
             return {...state,
                 followingInProgress:
                     action.payload.isFollowing ?
-                   state.followingInProgress.filter(id => id != action.payload.id)
-                    : [...state.followingInProgress,  action.payload.id)]
-
-            }
+                   state.followingInProgress.filter(id => id !== action.payload.id)
+                    : [...state.followingInProgress,  action.payload.id]}
 
         default:
             return state
@@ -181,7 +181,7 @@ export const ToggleFollowingProgressAC = (isFollowing: boolean, id: number) => {
         {
             type: TOGGLE_IS_FOLLOWING_PROGRESS,
             payload: {
-                isFollowing
+                isFollowing, id
             }
         } as const
     )
