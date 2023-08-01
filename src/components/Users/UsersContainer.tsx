@@ -5,7 +5,7 @@ import {
     SetCurrentPageAC,
     SetIsFetchingAC,
     SetTotalUsersCountAC,
-    SetUsersAC,
+    SetUsersAC, ToggleFollowingProgressAC,
     unFollowAC
 } from "../../redux/usersReducer";
 
@@ -20,6 +20,7 @@ import {usersAPI} from "../../api/usersAPI";
 
 interface State {
 }
+
 //update
 
 class UsersContainer extends React.Component<UsersClassProps, State> {
@@ -57,10 +58,13 @@ class UsersContainer extends React.Component<UsersClassProps, State> {
         return (
 
             <>
-                {this.props.isFetching && <Preloader />}
+                {this.props.isFetching && <Preloader/>}
                 <UsersFunctional unfollow={this.props.unfollow} follow={this.props.follow} users={this.props.users}
                                  currentPage={this.props.currentPage} pageSize={this.props.pageSize}
-                                 totalUsersCount={this.props.totalUsersCount} onPageChanged={this.onPageChanged}/>
+                                 totalUsersCount={this.props.totalUsersCount} onPageChanged={this.onPageChanged}
+                                 setToggleIsFollowing={this.props.setToggleIsFollowing} followingInProgress={this.props.followingInProgress}
+
+                />
             </>
         );
     }
@@ -74,7 +78,8 @@ const mapStateToProps = (state: AppStateType) => {
         pageSize: state.users.pageSize,
         totalUsersCount: state.users.totalUsersCount,
         currentPage: state.users.currentPage,
-        isFetching: state.users.isFetching
+        isFetching: state.users.isFetching,
+        followingInProgress: state.users.followingInProgress
     }
 
 };
@@ -99,12 +104,13 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
         },
         setToggleIsFetching: (isFetching: boolean) => {
             dispatch(SetIsFetchingAC(isFetching))
+        },
+        setToggleIsFollowing: (isFollowing: boolean) => {
+            dispatch(ToggleFollowingProgressAC(isFollowing))
         }
     }
 
 }
-
-
 
 
 export type UsersClassProps = ReturnType<typeof mapDispatchToProps> & ReturnType<typeof mapStateToProps>
@@ -116,6 +122,7 @@ export default connect(mapStateToProps, {
         setUsers: SetUsersAC,
         setCurrentPage: SetCurrentPageAC,
         setTotalUsersCount: SetTotalUsersCountAC,
-        setToggleIsFetching: SetIsFetchingAC
+        setToggleIsFetching: SetIsFetchingAC,
+        setToggleIsFollowing: ToggleFollowingProgressAC
     }
-    )(UsersContainer)
+)(UsersContainer)

@@ -1,10 +1,10 @@
-
 const FOLLOW = 'FOLLOW USER'
 const UNFOLLOW = 'UNFOLLOW USER'
 const SET_USERS = 'SET USERS'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS'
 
 // export type UserType =
 // {id: number, photoUrl: string, followed: boolean, fullName: string, status: string, location: {city: string, country: string}}
@@ -30,6 +30,7 @@ export type UsersType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: number[]
 
 }
 
@@ -39,48 +40,69 @@ const initialState: UsersType = {
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    followingInProgress: []
 
 }
-
-
-
 
 
 export const usersReducer = (state = initialState, action: TotalType): UsersType => {
 
 
-     switch (action.type) {
-         case FOLLOW:
+    switch (action.type) {
+        case FOLLOW:
 
-             return {...state, users: state.users.map((el: any)=> el.id === action.payload.userId ? {...el, followed: true} : el)}
+            return {
+                ...state,
+                users: state.users.map((el: any) => el.id === action.payload.userId ? {...el, followed: true} : el)
+            }
 
-         case UNFOLLOW:
-             return {...state, users: state.users.map((el: any)=> el.id === action.payload.userId ? {...el, followed: false} : el)}
+        case UNFOLLOW:
+            return {
+                ...state,
+                users: state.users.map((el: any) => el.id === action.payload.userId ? {...el, followed: false} : el)
+            }
 
-         case SET_USERS:
+        case SET_USERS:
             return {...state, users: action.payload.users}
 
-         case SET_CURRENT_PAGE:
+        case SET_CURRENT_PAGE:
             return {...state, currentPage: action.payload.currentPage}
-         case SET_TOTAL_USERS_COUNT:
+        case SET_TOTAL_USERS_COUNT:
 
             return {...state, totalUsersCount: action.payload.totalCount / 100}
-         case TOGGLE_IS_FETCHING:
+        case TOGGLE_IS_FETCHING:
 
             return {...state, isFetching: action.payload.isFetching}
+        case TOGGLE_IS_FOLLOWING_PROGRESS:
 
-         default: return state
-     }
+            return {...state,
+                followingInProgress:
+                    action.payload.isFollowing ?
+                   state.followingInProgress.filter(id => id != action.payload.id)
+                    : [...state.followingInProgress,  action.payload.id)]
+
+            }
+
+        default:
+            return state
+    }
 
 }
 //comment
-export type TotalType = FollowActionCreatorACType | UnFollowActionCreatorACType | setUsersACType | setCurrentPageACType | SetTotalUsersCountACType | SetIsFetchingACType
+export type TotalType =
+    FollowActionCreatorACType
+    | UnFollowActionCreatorACType
+    | setUsersACType
+    | setCurrentPageACType
+    | SetTotalUsersCountACType
+    | SetIsFetchingACType
+    | ToggleFollowingProgressACType
 
 export type FollowActionCreatorACType = ReturnType<typeof followAC>
 
 export const followAC = (userId: number) => {
-    return(
+    return (
         {
             type: FOLLOW,
             payload: {
@@ -93,7 +115,7 @@ export const followAC = (userId: number) => {
 export type UnFollowActionCreatorACType = ReturnType<typeof unFollowAC>
 
 export const unFollowAC = (userId: number) => {
-    return(
+    return (
         {
             type: UNFOLLOW,
             payload: {
@@ -105,7 +127,7 @@ export const unFollowAC = (userId: number) => {
 export type setUsersACType = ReturnType<typeof SetUsersAC>
 
 export const SetUsersAC = (users: any) => {
-    return(
+    return (
         {
             type: SET_USERS,
             payload: {
@@ -117,7 +139,7 @@ export const SetUsersAC = (users: any) => {
 export type setCurrentPageACType = ReturnType<typeof SetCurrentPageAC>
 
 export const SetCurrentPageAC = (currentPage: number) => {
-    return(
+    return (
         {
             type: SET_CURRENT_PAGE,
             payload: {
@@ -129,7 +151,7 @@ export const SetCurrentPageAC = (currentPage: number) => {
 export type SetTotalUsersCountACType = ReturnType<typeof SetTotalUsersCountAC>
 
 export const SetTotalUsersCountAC = (totalCount: number) => {
-    return(
+    return (
         {
             type: SET_TOTAL_USERS_COUNT,
             payload: {
@@ -142,11 +164,24 @@ export const SetTotalUsersCountAC = (totalCount: number) => {
 export type SetIsFetchingACType = ReturnType<typeof SetIsFetchingAC>
 
 export const SetIsFetchingAC = (isFetching: boolean) => {
-    return(
+    return (
         {
             type: TOGGLE_IS_FETCHING,
             payload: {
                 isFetching
+            }
+        } as const
+    )
+}
+
+export type ToggleFollowingProgressACType = ReturnType<typeof ToggleFollowingProgressAC>
+
+export const ToggleFollowingProgressAC = (isFollowing: boolean, id: number) => {
+    return (
+        {
+            type: TOGGLE_IS_FOLLOWING_PROGRESS,
+            payload: {
+                isFollowing
             }
         } as const
     )

@@ -14,6 +14,8 @@ export type UsersFunctionalPropsType = {
     follow: any
     unfollow: any
     onPageChanged: (pageNumber: number) => void
+    setToggleIsFollowing: any
+    followingInProgress: any
 }
 
 
@@ -57,12 +59,14 @@ const UsersFunctional = (props: UsersFunctionalPropsType) => {
                             {u.followed ? (
                                 <button onClick={() => {
 
-
+                                    props.setToggleIsFollowing(true, u.id)
                                    usersAPI.deleteUser(u.id)
                                         .then(res => {
                                                 if (res.data.resultCode === 0) {
                                                     props.unfollow(u.id)
                                                 }
+                                            props.setToggleIsFollowing(false, u.id)
+
                                             }
                                         )
 
@@ -71,7 +75,8 @@ const UsersFunctional = (props: UsersFunctionalPropsType) => {
                                 }
                                 }>Unfollow</button>
                             ) : (
-                                <button onClick={() => {
+                                <button disabled={props.followingInProgress.some(id => id === u.id) onClick={() => {
+                                    props.setToggleIsFollowing(true)
 
                                     usersAPI.setUser(u.id)
 
@@ -79,6 +84,8 @@ const UsersFunctional = (props: UsersFunctionalPropsType) => {
                                                 if (res.data.resultCode === 0) {
                                                     props.follow(u.id)
                                                 }
+                                            props.setToggleIsFollowing(false)
+
                                             }
                                         )
 
