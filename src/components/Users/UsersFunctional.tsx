@@ -66,8 +66,7 @@ const UsersFunctional = (props: UsersFunctionalPropsType) => {
                                             }
                                         )
 
-
-
+//update
 
                                 }
                                 }>Unfollow</button>
