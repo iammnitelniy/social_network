@@ -10,11 +10,11 @@ export type UsersFunctionalPropsType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
-    follow: any
-    unfollow: any
     onPageChanged: (pageNumber: number) => void
     setToggleIsFollowing: any
     followingInProgress: any
+    unFollowTC: any
+    followTC: any
 }
 
 
@@ -58,39 +58,13 @@ const UsersFunctional = (props: UsersFunctionalPropsType) => {
                             {u.followed ? (
                                 <button disabled={props.followingInProgress.some((id: number) => id === u.id)}  onClick={() => {
 
-                                    props.setToggleIsFollowing(true, u.id)
-                                   usersAPI.unfollowUser(u.id)
-                                        .then(res => {
-                                                if (res.data.resultCode === 0) {
-                                                    props.unfollow(u.id)
-                                                    props.setToggleIsFollowing(false, u.id)
-
-                                                }
-
-                                            }
-                                        )
-
-//update
+                                  props.unFollowTC(u.id)
 
                                 }
                                 }>Unfollow</button>
                             ) : (
                                 <button disabled={props.followingInProgress.some((id: number) => id === u.id)} onClick={() => {
-                                    props.setToggleIsFollowing(true, u.id)
-
-                                    usersAPI.followUser(u.id)
-
-                                        .then(res => {
-                                                if (res.data.resultCode === 0) {
-                                                    props.follow(u.id)
-                                                    props.setToggleIsFollowing(false, u.id)
-
-                                                }
-
-                                            }
-                                        )
-
-
+                                  props.followTC(u.id)
 
 
                                 }

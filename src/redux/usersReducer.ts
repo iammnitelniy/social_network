@@ -204,12 +204,28 @@ export const getUsersTC = (currentPage: number, pageSize: number) => (dispatch: 
 
         })
 }
-export const followTC = (userId: number, pageSize: number) => (dispatch: any) => {
+export const unFollowTC = (userId: number) => (dispatch: Dispatch) => {
    dispatch(ToggleFollowingProgressAC(true, userId))
     usersAPI.unfollowUser(userId)
         .then(res => {
                 if (res.data.resultCode === 0) {
                     dispatch(unFollowAC(userId))
+                    dispatch(ToggleFollowingProgressAC(false, userId))
+
+
+                }
+
+            }
+        )
+
+}
+
+export const followTC = (userId: number) => (dispatch: Dispatch) => {
+   dispatch(ToggleFollowingProgressAC(true, userId))
+    usersAPI.followUser(userId)
+        .then(res => {
+                if (res.data.resultCode === 0) {
+                    dispatch(followAC(userId))
                     dispatch(ToggleFollowingProgressAC(false, userId))
 
 

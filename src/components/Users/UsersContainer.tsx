@@ -1,12 +1,12 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {
-    followAC, getUsersTC,
+    followAC, followTC, getUsersTC,
     SetCurrentPageAC,
     SetIsFetchingAC,
     SetTotalUsersCountAC,
     SetUsersAC, ToggleFollowingProgressAC,
-    unFollowAC
+    unFollowAC, unFollowTC
 } from "../../redux/usersReducer";
 
 import {Dispatch} from "redux";
@@ -24,14 +24,12 @@ interface State {
 //update
 
 
-
-
 class UsersContainer extends React.Component<UsersClassProps, State> {
 
 
     componentDidMount() {
 
-     this.props.getUsersTC(this.props.currentPage, this.props.pageSize)
+        this.props.getUsersTC(this.props.currentPage, this.props.pageSize)
 
     }
 
@@ -49,10 +47,13 @@ class UsersContainer extends React.Component<UsersClassProps, State> {
 
             <>
                 {this.props.isFetching && <Preloader/>}
-                <UsersFunctional unfollow={this.props.unfollow} follow={this.props.follow} users={this.props.users}
+                <UsersFunctional users={this.props.users}
                                  currentPage={this.props.currentPage} pageSize={this.props.pageSize}
                                  totalUsersCount={this.props.totalUsersCount} onPageChanged={this.onPageChanged}
-                                 setToggleIsFollowing={this.props.setToggleIsFollowing} followingInProgress={this.props.followingInProgress}
+                                 setToggleIsFollowing={this.props.setToggleIsFollowing}
+                                 followingInProgress={this.props.followingInProgress}
+                                 unFollowTC={this.props.unFollowTC}
+                                 followTC={this.props.followTC}
 
                 />
             </>
@@ -76,21 +77,22 @@ const mapStateToProps = (state: AppStateType) => {
 
 const mapDispatchToProps = (dispatch: AppDispatchType) => {
     return {
-        follow: (userId: any) => {
-            dispatch(followAC(userId))
-        },
-        unfollow: (userId: any) => {
-            dispatch(unFollowAC(userId))
-        },
+
         setCurrentPage: (currentPage: any) => {
             dispatch(SetCurrentPageAC(currentPage))
         },
         setToggleIsFollowing: (isFollowing: boolean, id: number) => {
             dispatch(ToggleFollowingProgressAC(isFollowing, id))
         },
-        getUsersTC: (currentPage: number, pageSize: number) =>  {
+        getUsersTC: (currentPage: number, pageSize: number) => {
             dispatch(getUsersTC(currentPage, pageSize))
-    }
+        },
+        unFollowTC: (userId: number) => {
+            dispatch(unFollowTC(userId))
+        },
+        followTC: (userId: number) => {
+            dispatch(followTC(userId))
+        }
     }
 
 }
@@ -100,10 +102,11 @@ export type UsersClassProps = ReturnType<typeof mapDispatchToProps> & ReturnType
 
 
 export default connect(mapStateToProps, {
-        follow: followAC,
         unfollow: unFollowAC,
         setCurrentPage: SetCurrentPageAC,
         setToggleIsFollowing: ToggleFollowingProgressAC,
-        getUsersTC: getUsersTC
+        getUsersTC: getUsersTC,
+        unFollowTC: unFollowTC,
+        followTC: followTC
     }
 )(UsersContainer)
