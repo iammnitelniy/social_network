@@ -2,7 +2,6 @@ import React from 'react';
 import s from "./UsersClass.module.css";
 import {UserType} from "../../redux/usersReducer";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
 import {usersAPI} from "../../api/usersAPI";
 
 
@@ -57,15 +56,16 @@ const UsersFunctional = (props: UsersFunctionalPropsType) => {
                                 </NavLink>
                             </div>
                             {u.followed ? (
-                                <button onClick={() => {
+                                <button disabled={props.followingInProgress.some((id: number) => id === u.id)}  onClick={() => {
 
-                                    props.setToggleIsFollowing(false, u.id)
-                                   usersAPI.deleteUser(u.id)
+                                    props.setToggleIsFollowing(true, u.id)
+                                   usersAPI.unfollowUser(u.id)
                                         .then(res => {
                                                 if (res.data.resultCode === 0) {
                                                     props.unfollow(u.id)
+                                                    props.setToggleIsFollowing(false, u.id)
+
                                                 }
-                                            props.setToggleIsFollowing(true, u.id)
 
                                             }
                                         )
@@ -76,15 +76,16 @@ const UsersFunctional = (props: UsersFunctionalPropsType) => {
                                 }>Unfollow</button>
                             ) : (
                                 <button disabled={props.followingInProgress.some((id: number) => id === u.id)} onClick={() => {
-                                    props.setToggleIsFollowing(false, u.id)
+                                    props.setToggleIsFollowing(true, u.id)
 
-                                    usersAPI.setUser(u.id)
+                                    usersAPI.followUser(u.id)
 
                                         .then(res => {
                                                 if (res.data.resultCode === 0) {
                                                     props.follow(u.id)
+                                                    props.setToggleIsFollowing(false, u.id)
+
                                                 }
-                                            props.setToggleIsFollowing(true, u.id)
 
                                             }
                                         )

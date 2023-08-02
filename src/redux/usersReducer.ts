@@ -84,8 +84,8 @@ export const usersReducer = (state = initialState, action: TotalType): UsersType
             return {...state,
                 followingInProgress:
                     action.payload.isFollowing ?
-                   state.followingInProgress.filter(id => id !== action.payload.id)
-                    : [...state.followingInProgress,  action.payload.id]}
+                        [...state.followingInProgress,  action.payload.id]
+                    : state.followingInProgress.filter(id => id != action.payload.id)}
 
         default:
             return state
@@ -203,6 +203,21 @@ export const getUsersTC = (currentPage: number, pageSize: number) => (dispatch: 
             console.log(data.totalCount)
 
         })
+}
+export const followTC = (userId: number, pageSize: number) => (dispatch: any) => {
+   dispatch(ToggleFollowingProgressAC(true, userId))
+    usersAPI.unfollowUser(userId)
+        .then(res => {
+                if (res.data.resultCode === 0) {
+                    dispatch(unFollowAC(userId))
+                    dispatch(ToggleFollowingProgressAC(false, userId))
+
+
+                }
+
+            }
+        )
+
 }
 
 

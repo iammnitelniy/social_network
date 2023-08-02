@@ -33,22 +33,13 @@ class UsersContainer extends React.Component<UsersClassProps, State> {
 
      this.props.getUsersTC(this.props.currentPage, this.props.pageSize)
 
-
-
     }
 
 
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
-        this.props.setToggleIsFetching(true)
+        this.props.getUsersTC(this.props.currentPage, this.props.pageSize)
 
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-
-            .then(data => {
-                this.props.setToggleIsFetching(false)
-                this.props.setUsers(data.items)
-
-            })
     }
 
     render() {
@@ -91,18 +82,8 @@ const mapDispatchToProps = (dispatch: AppDispatchType) => {
         unfollow: (userId: any) => {
             dispatch(unFollowAC(userId))
         },
-        setUsers: (users: any) => {
-            dispatch(SetUsersAC(users))
-            console.log(users)
-        },
         setCurrentPage: (currentPage: any) => {
             dispatch(SetCurrentPageAC(currentPage))
-        },
-        setTotalUsersCount: (totalCount: number) => {
-            dispatch(SetTotalUsersCountAC(totalCount))
-        },
-        setToggleIsFetching: (isFetching: boolean) => {
-            dispatch(SetIsFetchingAC(isFetching))
         },
         setToggleIsFollowing: (isFollowing: boolean, id: number) => {
             dispatch(ToggleFollowingProgressAC(isFollowing, id))
@@ -121,10 +102,7 @@ export type UsersClassProps = ReturnType<typeof mapDispatchToProps> & ReturnType
 export default connect(mapStateToProps, {
         follow: followAC,
         unfollow: unFollowAC,
-        setUsers: SetUsersAC,
         setCurrentPage: SetCurrentPageAC,
-        setTotalUsersCount: SetTotalUsersCountAC,
-        setToggleIsFetching: SetIsFetchingAC,
         setToggleIsFollowing: ToggleFollowingProgressAC,
         getUsersTC: getUsersTC
     }
