@@ -10,7 +10,7 @@ import {
 } from "../../redux/usersReducer";
 
 import {Dispatch} from "redux";
-import {AppStateType} from "../../redux/redux-store";
+import {AppDispatchType, AppStateType} from "../../redux/redux-store";
 
 import axios from "axios";
 import UsersFunctional from "./UsersFunctional";
@@ -24,14 +24,14 @@ interface State {
 //update
 
 
-dispatch =
+
 
 class UsersContainer extends React.Component<UsersClassProps, State> {
 
 
     componentDidMount() {
 
-     dispatch(getUsersTC(this.props.currentPage, this.props.pageSize))
+     this.props.getUsersTC(this.props.currentPage, this.props.pageSize)
 
 
 
@@ -83,7 +83,7 @@ const mapStateToProps = (state: AppStateType) => {
 
 };
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
+const mapDispatchToProps = (dispatch: AppDispatchType) => {
     return {
         follow: (userId: any) => {
             dispatch(followAC(userId))
@@ -106,7 +106,10 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
         },
         setToggleIsFollowing: (isFollowing: boolean, id: number) => {
             dispatch(ToggleFollowingProgressAC(isFollowing, id))
-        }
+        },
+        getUsersTC: (currentPage: number, pageSize: number) =>  {
+            dispatch(getUsersTC(currentPage, pageSize))
+    }
     }
 
 }
@@ -122,6 +125,7 @@ export default connect(mapStateToProps, {
         setCurrentPage: SetCurrentPageAC,
         setTotalUsersCount: SetTotalUsersCountAC,
         setToggleIsFetching: SetIsFetchingAC,
-        setToggleIsFollowing: ToggleFollowingProgressAC
+        setToggleIsFollowing: ToggleFollowingProgressAC,
+        getUsersTC: getUsersTC
     }
 )(UsersContainer)

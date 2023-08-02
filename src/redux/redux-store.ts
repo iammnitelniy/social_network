@@ -20,8 +20,8 @@ export const store = createStore(reducers, applyMiddleware(thunkMiddleware))
 
 export type AppStateType = ReturnType<typeof reducers>
 
-type AppDispatchType = ThunkDispatch<AppStateType, unknown, AnyAction>
-export const useAppDispatch = useDispatch
+export type AppDispatchType = ThunkDispatch<AppStateType, unknown, AnyAction>
+
 // а это, чтобы можно было в консоли браузера обращаться к store в любой момент
 // @ts-ignore
 window.store = store;

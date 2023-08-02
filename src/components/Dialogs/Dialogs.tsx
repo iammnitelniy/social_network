@@ -12,7 +12,7 @@ import {
 } from "../../redux/store";
 import {useRef} from "react";
 import {sendMessageActionCreator, updateNewMessageBodyCreator} from "../../redux/dialogsReducer";
-import store from "../../redux/redux-store";
+import {store} from "../../redux/redux-store";
 
 
 
