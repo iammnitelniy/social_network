@@ -49,7 +49,7 @@ const initialState: UsersType = {
 }
 
 
-export const usersReducer = (state = initialState, action: TotalType): UsersType => {
+export const usersReducer = (state = initialState, action: UsersTotalType): UsersType => {
 
 
     switch (action.type) {
@@ -93,7 +93,7 @@ export const usersReducer = (state = initialState, action: TotalType): UsersType
 
 }
 //comment
-export type TotalType =
+export type UsersTotalType =
     FollowActionCreatorACType
     | UnFollowActionCreatorACType
     | setUsersACType

@@ -1,3 +1,7 @@
+import {Dispatch} from "redux";
+import {profileAPI} from "../api/ProfileAPI";
+import {SetUserProfileAC} from "./profileReducer";
+import {authAPI} from "../api/authAPI";
 
 
 const SET_USER_DATE = 'SET_USER_DATE'
@@ -64,6 +68,20 @@ export const setAuthUserAC = (data: ResponseUserType) => {
             data
         } as const
     )
+}
+
+export const setAuthUserTC = () => (dispatch: Dispatch) => {
+
+
+    authAPI.getProfile()
+        .then(res => {
+                if (res.data.resultCode === 0) {
+                   dispatch(setAuthUserAC(res.data))
+                }
+
+            }
+
+        )
 }
 
 

@@ -1,5 +1,8 @@
 import {AddPostActionType, ChangeNewTextActionType, ProfilePageStateType} from "./store";
 import {ProfileFromAPIType} from "../components/Profile/ProfileContainer";
+import {Dispatch} from "redux";
+import {profileAPI} from "../api/ProfileAPI";
+import {AppDispatchType, AppThunk} from "./redux-store";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST = 'UPDATE-NEW-POST-TEXT';
@@ -67,7 +70,7 @@ const profileReducer = (state = initialState, action: allProfileActionsType): Pr
 
  }
 
-type allProfileActionsType = addPostACType | updateNewPostTextACType | SetUserProfileACType
+export type allProfileActionsType = addPostACType | updateNewPostTextACType | SetUserProfileACType
 
 export type addPostACType = ReturnType<typeof addPostActionCreator>
 
@@ -106,6 +109,15 @@ export const SetUserProfileAC = (profile: ProfileFromAPIType) => {
         } as const
 
     )
+}
+
+
+export const getUserProfileTC = (userId: string) => (dispatch: Dispatch) => {
+
+    profileAPI.getProfile(userId)
+        .then((response) => {
+            dispatch(SetUserProfileAC(response.data))
+        })
 }
 
 export default profileReducer

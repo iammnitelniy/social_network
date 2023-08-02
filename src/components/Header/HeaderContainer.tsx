@@ -3,10 +3,11 @@ import {NavLink, withRouter} from "react-router-dom";
 import classes from "*.module.css";
 import {Header} from "./Header";
 import axios from "axios";
-import {ResponseUserType, setAuthUserAC} from "../../redux/auth-reducer";
+import {ResponseUserType, setAuthUserAC, setAuthUserTC} from "../../redux/auth-reducer";
 import {AppStateType} from "../../redux/redux-store";
 import {connect, ConnectedProps} from "react-redux";
 import {Dispatch} from "redux";
+import {authAPI} from "../../api/authAPI";
 
 
 type HeaderContainerPropsType = {
@@ -27,17 +28,8 @@ class HeaderContainer extends React.Component<PropsFromRedux, State>{
 
 
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: true})
 
-            .then(res => {
-                if (res.data.resultCode === 0) {
-                    this.props.setAuthUser(res.data)
-                }
-
-            }
-
-    )
-
+        this.props.setAuthUserTC()
 
     }
 
@@ -59,9 +51,9 @@ const mapStateToProps = (state: AppStateType) => {
 
 };
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-    setAuthUser: (auth: ResponseUserType) => {
-        dispatch(setAuthUserAC(auth));
+const mapDispatchToProps = (dispatch: any) => ({
+    setAuthUserTC: () => {
+        dispatch(setAuthUserTC());
     },
 });
 

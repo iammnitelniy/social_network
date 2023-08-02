@@ -79,7 +79,7 @@ let initialState:DialogsPageStateType = {
 }
 
 
-type AllDialogsActionsType = SendMessageACType | UpdateNewMessageBodyACType
+export type AllDialogsActionsType = SendMessageACType | UpdateNewMessageBodyACType
 export type SendMessageACType = ReturnType<typeof sendMessageActionCreator>
 
 export const sendMessageActionCreator = (): SendMessageType => {
