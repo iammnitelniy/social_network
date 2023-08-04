@@ -1,33 +1,22 @@
-import React, {ChangeEvent, MouseEvent} from 'react';
+import React, {ChangeEvent} from 'react';
 import classes from './Dialogs.module.css'
-import {NavLink} from "react-router-dom";
 import {DialogItem} from "./Dialogitem/Dialogitem";
 import {Message} from "./Message/Message";
 import {DialogItemType, MessageItemType} from "../../App";
 import {
-    ActionTypes,
     DialogsPageStateType,
-    StoreType,
-
 } from "../../redux/store";
-import {useRef} from "react";
-import {sendMessageActionCreator, updateNewMessageBodyCreator} from "../../redux/dialogsReducer";
-import {store} from "../../redux/redux-store";
+
 
 
 
 
 type DialogsPropsType = {
 
-
     updateNewMessageBody: (body: string)=> void
-    // store: StoreType
     dialogsPage: DialogsPageStateType
     newMessageClicker: () => void
-        //commit
-        //commit2
-    // state : Array<DialogItemType>
-    // state : Array<MessageItemType>
+    isAuth: boolean
 
 };
 
@@ -46,7 +35,7 @@ export const Dialogs = (props: DialogsPropsType) => {
     const newMessageBody = state.newMessageBody
 
 
-    const newMessageClickHandler = (e:MouseEvent<HTMLButtonElement>) => {
+    const newMessageClickHandler = () => {
         // store.dispatch(sendMessageActionCreator())
         props.newMessageClicker()
 
@@ -61,6 +50,8 @@ export const Dialogs = (props: DialogsPropsType) => {
 
 
     }
+
+    alert(props.isAuth)
 
 
 
