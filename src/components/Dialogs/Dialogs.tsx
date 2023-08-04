@@ -6,6 +6,7 @@ import {DialogItemType, MessageItemType} from "../../App";
 import {
     DialogsPageStateType,
 } from "../../redux/store";
+import {Redirect} from "react-router-dom";
 
 
 
@@ -51,7 +52,7 @@ export const Dialogs = (props: DialogsPropsType) => {
 
     }
 
-    alert(props.isAuth)
+    if(!props.isAuth) return <Redirect to={'/login'}/>
 
 
 
