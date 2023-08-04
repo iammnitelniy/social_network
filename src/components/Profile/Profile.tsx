@@ -19,7 +19,7 @@ export type PostItemType = {
 type ProfilePropsType = {
 
 profile: ProfileFromAPIType
-isAuth: boolean
+
 
 }
 

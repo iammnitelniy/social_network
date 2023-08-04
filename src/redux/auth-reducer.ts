@@ -19,11 +19,10 @@ export type ResponseUserType = {
 
 
 type initialStateType = {
-    userId: null | number
-    email: null | string
-    login: null | string
-    isAuth: boolean
-
+    userId: any
+    email: any
+    login: any
+    isAuth: any
 }
 
 
@@ -74,14 +73,14 @@ export const setAuthUserTC = () => (dispatch: Dispatch) => {
 
 
     authAPI.getProfile()
-        .then(res => {
-                if (res.data.resultCode === 0) {
-                   dispatch(setAuthUserAC(res.data))
-                }
-
+        .then((res: { data: ResponseUserType }) => {
+            if (res.data.resultCode === 0) {
+                dispatch(setAuthUserAC(res.data))
             }
-
-        )
+        })
+        .catch((error: any) => {
+            console.log(error)
+        })
 }
 
 

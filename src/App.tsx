@@ -59,7 +59,7 @@ const App = (props:AppPropsType) => {
                            render={() => <DialogsContainer/>}/>
                     <Route path='/profile/:userId?'
                            render={() =>
-                    <ProfileContainer />}/>
+                    <ProfileContainer/>}/>
                     {/*<Sidebar sidebar={props.store.sidebar}/>*/}
                     {/*<Route path='/news' component={News}/>*/}
                     {/*<Route path='/music' component={Music}/>*/}
