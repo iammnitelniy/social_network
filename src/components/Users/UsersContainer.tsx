@@ -16,6 +16,7 @@ import axios from "axios";
 import UsersFunctional from "./UsersFunctional";
 import Preloader from "../Preloader/Preloader";
 import {usersAPI} from "../../api/usersAPI";
+import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 interface State {
@@ -101,6 +102,9 @@ const mapDispatchToProps = (dispatch: AppDispatchType) => {
 export type UsersClassProps = ReturnType<typeof mapDispatchToProps> & ReturnType<typeof mapStateToProps>
 
 
+
+const withRedirect =  WithAuthRedirect(UsersContainer)
+
 export default connect(mapStateToProps, {
         unfollow: unFollowAC,
         setCurrentPage: SetCurrentPageAC,
@@ -109,4 +113,4 @@ export default connect(mapStateToProps, {
         unFollowTC: unFollowTC,
         followTC: followTC
     }
-)(UsersContainer)
+)(withRedirect)
