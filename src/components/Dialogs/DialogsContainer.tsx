@@ -1,16 +1,4 @@
-import React, {ChangeEvent, MouseEvent} from 'react';
-import classes from './Dialogs.module.css'
-import {NavLink} from "react-router-dom";
-import {DialogItem} from "./Dialogitem/Dialogitem";
-import {Message} from "./Message/Message";
-import {DialogItemType, MessageItemType} from "../../App";
-import {
-    ActionTypes,
-    DialogsPageStateType,
-    StoreType,
-
-} from "../../redux/store";
-import {useRef} from "react";
+import React from 'react';
 import {sendMessageActionCreator, updateNewMessageBodyCreator} from "../../redux/dialogsReducer";
 
 import {Dialogs} from "./Dialogs";

@@ -18,11 +18,13 @@ export type ResponseUserType = {
 }
 
 
-type initialStateType = {
-    userId: any
-    email: any
-    login: any
-    isAuth: any
+export type AuthInitialStateType = {
+    userId:  null | number
+
+    email:   null | string
+
+    login: null | string
+    isAuth: boolean
 }
 
 
@@ -38,12 +40,12 @@ const initialState = {
 
 
 
-export const authReducer = (state = initialState, action: TotalType): initialStateType => {
+export const authReducer = (state = initialState, action: TotalType): AuthInitialStateType => {
 
 
      switch (action.type) {
          case SET_USER_DATE:
-             console.log(action.data)
+
                 return {...state, userId: action.data.data.id, email: action.data.data.email, login: action.data.data.login, isAuth: true}
 
 
@@ -75,7 +77,7 @@ export const setAuthUserTC = () => (dispatch: Dispatch) => {
     authAPI.getProfile()
         .then((res: { data: ResponseUserType }) => {
             if (res.data.resultCode === 0) {
-                dispatch(setAuthUserAC(res.data))
+               dispatch(setAuthUserAC(res.data))
             }
         })
         .catch((error: any) => {

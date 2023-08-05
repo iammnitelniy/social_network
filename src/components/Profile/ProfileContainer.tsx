@@ -4,7 +4,9 @@ import {connect, ConnectedProps} from 'react-redux';
 import {AppStateType} from '../../redux/redux-store';
 import {getUserProfileTC} from '../../redux/profileReducer';
 import {withRouter, RouteComponentProps, Redirect} from 'react-router-dom';
-import WithAuthRedirect from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
+import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
+
 
 
 
@@ -34,17 +36,20 @@ export type ProfileFromAPIType = {
     };
 };
 
-type ProfileContainerProps = RouteComponentProps<{ userId: string }> & PropsFromRedux;
+// type ProfileContainerProps = RouteComponentProps<{ userId: string }> & PropsFromRedux;
 
-class ProfileContainer extends React.Component<ProfileContainerProps, State> {
+class ProfileContainer extends React.Component<any, State> {
+
+
     componentDidMount() {
+
 
         let userId = this.props.match.params.userId
         if (!userId) {
             userId = "2"
         }
-        this.props.getUserProfileTC(userId)
-        // if(!this.props.isAuth) return <Redirect to={'/login'} />
+         this.props.getUserProfileTC(userId)
+
     }
 
     render() {
@@ -57,12 +62,9 @@ class ProfileContainer extends React.Component<ProfileContainerProps, State> {
 }
 
 
-
-
-
-
-const mapStateToProps = (state: AppStateType) => ({
-    profile: state.profilePage.profile,
+const mapStateToProps = (state: any) => ({
+    auth: state.auth.isAuth,
+    profile:state.profilePage.profile
 
 
 });
@@ -73,8 +75,11 @@ const mapDispatchToProps = (dispatch: any) => ({
     },
 });
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
 
-type PropsFromRedux = ConnectedProps<typeof connector>;
+export default  compose<React.ComponentType>(connect(mapStateToProps,mapDispatchToProps),withRouter,WithAuthRedirect)(ProfileContainer)
 
-export default connector(withRouter(WithAuthRedirect(ProfileContainer)));
+// const connector = connect(mapStateToProps, mapDispatchToProps);
+//
+// type PropsFromRedux = ConnectedProps<typeof connector>;
+//
+// export default connector(withRouter(WithAuthRedirect(ProfileContainer)));
