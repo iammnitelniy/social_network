@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './ProfileInfo.module.css'
 import {ProfileFromAPIType} from "../ProfileContainer";
 import Preloader from "../../Preloader/Preloader";
-import {ProfileStatus} from "./ProfileStatus";
+import ProfileStatus from "./ProfileStatus";
 
 
 type ProfileInfoPropsType = {

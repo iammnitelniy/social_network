@@ -1,24 +1,52 @@
 import React from 'react';
-import Preloader from "../../Preloader/Preloader";
 
-
+interface State {
+}
 type ProfileStatusPropsType = {
     status: string
 };
 
-export const ProfileStatus = (props: ProfileStatusPropsType) => {
+class ProfileStatus extends React.Component<ProfileStatusPropsType, State>{
+
+
+    state = {
+        editMode: false
+    }
+
+
+    activateToggleEditMode ()  {
+        this.setState({
+            editMode: !this.state.editMode
+        })
+        this.state.editMode =
+        !this.state.editMode
+
+    }
+
+
+    render() {
     return  (
         <>
+
+            {
+                !this.state.editMode &&
             <div>
-                <input value={props.status}/>
+                <span  onDoubleClick={this.activateToggleEditMode.bind(this)}> {this.props.status}</span>
 
             </div>
+            }
+
+            {this.state.editMode &&
             <div>
 
+                <input autoFocus={true} onBlur={this.activateToggleEditMode.bind(this)} value={this.props.status}/>
 
 
             </div>
-        
+            }
         </>
     );
-};
+}
+}
+
+export default ProfileStatus
