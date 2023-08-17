@@ -1,9 +1,8 @@
 import React from 'react';
 import {Profile} from './Profile';
-import {connect, ConnectedProps} from 'react-redux';
-import {AppStateType} from '../../redux/redux-store';
+import {connect} from 'react-redux';
 import {getUserProfileTC} from '../../redux/profileReducer';
-import {withRouter, RouteComponentProps, Redirect} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import {compose} from "redux";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 
@@ -76,7 +75,7 @@ const mapDispatchToProps = (dispatch: any) => ({
 });
 
 
-export default  compose<React.ComponentType>(connect(mapStateToProps,mapDispatchToProps),withRouter,WithAuthRedirect)(ProfileContainer)
+export default  compose<React.ComponentType>(connect(mapStateToProps,mapDispatchToProps),withRouter)(ProfileContainer)
 
 // const connector = connect(mapStateToProps, mapDispatchToProps);
 //
