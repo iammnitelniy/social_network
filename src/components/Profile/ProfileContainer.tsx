@@ -5,7 +5,7 @@ import {AppStateType} from '../../redux/redux-store';
 import {getUserProfileTC} from '../../redux/profileReducer';
 import {withRouter, RouteComponentProps, Redirect} from 'react-router-dom';
 import {compose} from "redux";
-import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
+import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 
 
 

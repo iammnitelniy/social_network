@@ -1,28 +1,22 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {
-    followAC, followTC, getUsersTC,
-    SetCurrentPageAC,
-    SetIsFetchingAC,
-    SetTotalUsersCountAC,
-    SetUsersAC, ToggleFollowingProgressAC,
+import {followTC, getUsersTC,
+    SetCurrentPageAC, ToggleFollowingProgressAC,
     unFollowAC, unFollowTC
 } from "../../redux/usersReducer";
 
-import {Dispatch} from "redux";
+import {compose} from "redux";
 import {AppDispatchType, AppStateType} from "../../redux/redux-store";
-
-import axios from "axios";
 import UsersFunctional from "./UsersFunctional";
 import Preloader from "../Preloader/Preloader";
-import {usersAPI} from "../../api/usersAPI";
-import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
+import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
+
 
 
 interface State {
 }
 
-//update
+
 
 
 class UsersContainer extends React.Component<UsersClassProps, State> {
@@ -103,14 +97,24 @@ export type UsersClassProps = ReturnType<typeof mapDispatchToProps> & ReturnType
 
 
 
-const withRedirect =  WithAuthRedirect(UsersContainer)
+// const withRedirect =  WithAuthRedirect(UsersContainer)
+//
+// export default connect(mapStateToProps, {
+//         unfollow: unFollowAC,
+//         setCurrentPage: SetCurrentPageAC,
+//         setToggleIsFollowing: ToggleFollowingProgressAC,
+//         getUsersTC: getUsersTC,
+//         unFollowTC: unFollowTC,
+//         followTC: followTC
+//     }
+// )(withRedirect)
 
-export default connect(mapStateToProps, {
-        unfollow: unFollowAC,
-        setCurrentPage: SetCurrentPageAC,
-        setToggleIsFollowing: ToggleFollowingProgressAC,
-        getUsersTC: getUsersTC,
-        unFollowTC: unFollowTC,
-        followTC: followTC
-    }
-)(withRedirect)
+
+export default  compose<React.ComponentType>(connect(mapStateToProps,{
+    unfollow: unFollowAC,
+    setCurrentPage: SetCurrentPageAC,
+    setToggleIsFollowing: ToggleFollowingProgressAC,
+    getUsersTC: getUsersTC,
+    unFollowTC: unFollowTC,
+    followTC: followTC}), WithAuthRedirect)(UsersContainer)
+
