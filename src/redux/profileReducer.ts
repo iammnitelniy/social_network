@@ -1,14 +1,23 @@
-import {AddPostActionType, ChangeNewTextActionType, ProfilePageStateType} from "./store";
+import {AddPostActionType} from "./store";
 import {ProfileFromAPIType} from "../components/Profile/ProfileContainer";
 import {Dispatch} from "redux";
 import {profileAPI} from "../api/ProfileAPI";
-import {AppDispatchType, AppThunk} from "./redux-store";
-
+import {PostItemType} from "../components/Profile/Profile";
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const SET_PROFILE_STATUS = 'SET_PROFILE_STATUS';
 
-let initialState:ProfilePageStateType = {
+
+type ProfilePageStateTypeRedux =  {
+    postData: Array<PostItemType>
+    newPostText: string,
+    profile: any,
+    status: string
+
+}
+
+let initialState:ProfilePageStateTypeRedux = {
     postData: [
         {
             id: 1,
@@ -38,12 +47,13 @@ let initialState:ProfilePageStateType = {
 
     ],
     newPostText: "",
-    profile: null
+    profile: null,
+    status: ""
 
 }
 
 
-const profileReducer = (state = initialState, action: allProfileActionsType): ProfilePageStateType=> {
+const profileReducer = (state = initialState, action: allProfileActionsType): ProfilePageStateTypeRedux=> {
 
      switch (action.type) {
          case ADD_POST:
@@ -63,6 +73,9 @@ const profileReducer = (state = initialState, action: allProfileActionsType): Pr
          case SET_USER_PROFILE:
              return {...state, profile: action.profile}
 
+         case SET_PROFILE_STATUS:
+             return {...state, status: action.status}
+
          default:
              return state
      }
@@ -70,7 +83,7 @@ const profileReducer = (state = initialState, action: allProfileActionsType): Pr
 
  }
 
-export type allProfileActionsType = addPostACType | updateNewPostTextACType | SetUserProfileACType
+export type allProfileActionsType = addPostACType | updateNewPostTextACType | SetUserProfileACType | SetProfileStatusACType
 
 export type addPostACType = ReturnType<typeof addPostActionCreator>
 
@@ -111,6 +124,18 @@ export const SetUserProfileAC = (profile: ProfileFromAPIType) => {
     )
 }
 
+export type SetProfileStatusACType = ReturnType<typeof SetProfileStatusAC>
+export const SetProfileStatusAC = (status: string) => {
+
+    return (
+        {
+            type: SET_PROFILE_STATUS,
+            status
+        } as const
+
+    )
+}
+
 
 export const getUserProfileTC = (userId: string) => (dispatch: Dispatch) => {
 
@@ -119,5 +144,24 @@ export const getUserProfileTC = (userId: string) => (dispatch: Dispatch) => {
             dispatch(SetUserProfileAC(response.data))
         })
 }
+
+export const setProfileStatusTC = (userId: string) => (dispatch: Dispatch) => {
+
+    profileAPI.getStatus(userId)
+        .then((response) => {
+            dispatch(SetProfileStatusAC(response.data))
+        })
+}
+export const updateProfileStatusTC = (status: string) => (dispatch: Dispatch) => {
+
+    profileAPI.updateStatus(status)
+        .then((response) => {
+            if(response.data.resultCode === 0) {
+                dispatch(SetProfileStatusAC(status))
+            }
+        })
+}
+
+
 
 export default profileReducer

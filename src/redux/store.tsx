@@ -45,7 +45,8 @@ export type ActionTypes = AddPostActionType | ChangeNewTextActionType | AddNewMe
 export type ProfilePageStateType = {
     postData: Array<PostItemType>
     newPostText: string,
-    profile: any
+    profile: any,
+
 }
 export type DialogsPageStateType = {
     dialogsData: Array<DialogItemType>

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Profile} from './Profile';
 import {connect} from 'react-redux';
-import {getUserProfileTC} from '../../redux/profileReducer';
+import {getUserProfileTC, updateProfileStatusTC} from '../../redux/profileReducer';
 import {withRouter} from 'react-router-dom';
 import {compose} from "redux";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
@@ -49,6 +49,9 @@ class ProfileContainer extends React.Component<any, State> {
         }
          this.props.getUserProfileTC(userId)
 
+        this.props.setProfileStatusTC(userId)
+        this.props.updateProfileStatusTC(this.props.status)
+
     }
 
     render() {
@@ -63,7 +66,8 @@ class ProfileContainer extends React.Component<any, State> {
 
 const mapStateToProps = (state: any) => ({
     auth: state.auth.isAuth,
-    profile:state.profilePage.profile
+    profile:state.profilePage.profile,
+    status: state.profilePage.status
 
 
 });
@@ -71,6 +75,12 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = (dispatch: any) => ({
     getUserProfileTC: (userId: string) => {
         dispatch(getUserProfileTC(userId));
+    },
+    setProfileStatusTC: (userId: string) => {
+        dispatch(getUserProfileTC(userId));
+    },
+    updateProfileStatusTC: (status: string) => {
+        dispatch(updateProfileStatusTC(status));
     },
 });
 
