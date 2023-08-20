@@ -1,8 +1,5 @@
 import React from 'react';
-import classes from './Profile.module.css'
-import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ActionTypes, AddPostActionType, ChangeNewTextActionType, ProfilePageStateType} from "../../redux/store";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {ProfileFromAPIType} from "./ProfileContainer";
 
@@ -18,8 +15,9 @@ export type PostItemType = {
 
 type ProfilePropsType = {
 
-profile: ProfileFromAPIType
-
+    profile: ProfileFromAPIType,
+    status: string
+    updateProfileStatus: any
 
 }
 
@@ -28,7 +26,7 @@ export function Profile(props: ProfilePropsType) {
     return (
         <div>
 
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo profile={props.profile} status={props.status} updateProfileStatus={props.updateProfileStatus}/>
 
 
             <MyPostsContainer  />

@@ -7,16 +7,19 @@ import ProfileStatus from "./ProfileStatus";
 
 type ProfileInfoPropsType = {
     profile: ProfileFromAPIType
+    status: string,
+    updateProfileStatus: any
 };
 
 export const ProfileInfo = (props: ProfileInfoPropsType) => {
+
     return !props.profile ? (
         <Preloader />
     ) : (
         <div>
             <div>
                 <img src={props.profile.photos.large} />
-                <ProfileStatus status={'Hello my friends'}/>
+                <ProfileStatus status={props.status} updateProfileStatus={props.updateProfileStatus}/>
             </div>
             <div className={classes.descriptionBlock}>{props.profile.fullName}</div>
             <span>{props.profile.lookingForAJob}</span>

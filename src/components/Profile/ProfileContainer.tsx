@@ -1,10 +1,11 @@
 import React from 'react';
 import {Profile} from './Profile';
 import {connect} from 'react-redux';
-import {getUserProfileTC, updateProfileStatusTC} from '../../redux/profileReducer';
+import {getProfileStatusTC, getUserProfileTC, updateProfileStatusTC} from '../../redux/profileReducer';
 import {withRouter} from 'react-router-dom';
 import {compose} from "redux";
-import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
+
+
 
 
 
@@ -47,41 +48,53 @@ class ProfileContainer extends React.Component<any, State> {
         if (!userId) {
             userId = "2"
         }
-         this.props.getUserProfileTC(userId)
+         this.props.getUserProfile(userId)
+        this.props.getProfileStatus(userId)
 
-        this.props.setProfileStatusTC(userId)
-        this.props.updateProfileStatusTC(this.props.status)
 
     }
 
+
     render() {
+
+
         return (
             <div>
-                <Profile profile={this.props.profile} />
+                <Profile profile={this.props.profile}
+                         status={this.props.statusFromServer}
+                         updateProfileStatus={this.props.updateProfileStatus}
+
+                />
             </div>
         );
     }
 }
 
 
-const mapStateToProps = (state: any) => ({
-    auth: state.auth.isAuth,
-    profile:state.profilePage.profile,
-    status: state.profilePage.status
+const mapStateToProps = (state: any) => {
+
+    console.log(state.profilePage.status)
+    return (
+        {
+            auth: state.auth.isAuth,
+            profile: state.profilePage.profile,
+            statusFromServer: state.profilePage.status
 
 
-});
+        }
 
+    )
+}
 //update
 
 const mapDispatchToProps = (dispatch: any) => ({
-    getUserProfileTC: (userId: string) => {
+    getUserProfile: (userId: string) => {
         dispatch(getUserProfileTC(userId));
     },
-    setProfileStatusTC: (userId: string) => {
-        dispatch(getUserProfileTC(userId));
+    getProfileStatus: (userId: string) => {
+        dispatch(getProfileStatusTC(userId));
     },
-    updateProfileStatusTC: (status: string) => {
+    updateProfileStatus: (status: string) => {
         dispatch(updateProfileStatusTC(status));
     },
 });
