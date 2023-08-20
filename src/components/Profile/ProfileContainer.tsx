@@ -72,6 +72,8 @@ const mapStateToProps = (state: any) => ({
 
 });
 
+//update
+
 const mapDispatchToProps = (dispatch: any) => ({
     getUserProfileTC: (userId: string) => {
         dispatch(getUserProfileTC(userId));
