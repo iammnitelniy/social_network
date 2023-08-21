@@ -12,7 +12,7 @@ import {
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import Login from "./components/Login/Login";
+import {Login} from "./components/Login/Login";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 
@@ -42,7 +42,7 @@ const App = (props:AppPropsType) => {
 
     // const arrayHeader = ["Home ", "News Feed ", "Messages "]
     // const technologiesNames = ["bow ", "wow ", "wow "]
-    const navbarNames = ["Profile", "Messages", "News", "Music", "Settings", "Users"]
+    const navbarNames = ["Profile", "Messages", "News", "Music", "Settings", "Users", 'Login']
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
