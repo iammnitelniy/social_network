@@ -2,14 +2,13 @@ import React, {ChangeEvent} from 'react';
 
 interface State {
 }
+
 type ProfileStatusPropsType = {
     status: string
     updateProfileStatus: any
 };
 
-class ProfileStatus extends React.Component<ProfileStatusPropsType, State>{
-
-
+class ProfileStatus extends React.Component<ProfileStatusPropsType, State> {
 
 
     state = {
@@ -18,14 +17,13 @@ class ProfileStatus extends React.Component<ProfileStatusPropsType, State>{
     }
 
 
-    activateToggleEditMode = () =>  {
+    activateToggleEditMode = () => {
         this.setState({
             editMode: !this.state.editMode
         })
         this.props.updateProfileStatus(this.state.status)
         this.state.editMode =
-        !this.state.editMode
-
+            !this.state.editMode
 
 
     }
@@ -36,30 +34,42 @@ class ProfileStatus extends React.Component<ProfileStatusPropsType, State>{
     }
 
 
+    componentDidUpdate(prevProps: any, prevState: any) {
+
+        if(prevProps.status !== this.props.status) {
+            this.setState({
+                status: this.props.status
+            })
+        }
+
+        console.log("Component did update")
+    }
+
     render() {
-    return  (
-        <>
+        return (
+            <>
 
-            {
-                !this.state.editMode &&
-            <div>
-                <span  onDoubleClick={this.activateToggleEditMode}> {this.props.status || "No status"}</span>
+                {
+                    !this.state.editMode &&
+                    <div>
+                        <span onDoubleClick={this.activateToggleEditMode}> {this.props.status || "No status"}</span>
 
-            </div>
-            }
+                    </div>
+                }
 
-            {this.state.editMode &&
+                {this.state.editMode &&
 
-            <div>
+                    <div>
 
-                <input onChange={this.onChangeCallback} autoFocus={true} onBlur={this.activateToggleEditMode} value={this.state.status}/>
+                        <input onChange={this.onChangeCallback} autoFocus={true} onBlur={this.activateToggleEditMode}
+                               value={this.state.status}/>
 
 
-            </div>
-            }
-        </>
-    );
-}
+                    </div>
+                }
+            </>
+        );
+    }
 }
 
 export default ProfileStatus
