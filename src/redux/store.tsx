@@ -1,9 +1,6 @@
 import React from "react";
 import {PostItemType} from "../components/Profile/Profile";
 import {DialogItemType, MessageItemType} from "../App";
-import profileReducer from "./profileReducer";
-import dialogsReducer from "./dialogsReducer";
-import sidebarReducer from "./sidebarReducer";
 
 
 export type StoreType = {
@@ -50,7 +47,7 @@ export type ProfilePageStateType = {
 }
 export type DialogsPageStateType = {
     dialogsData: Array<DialogItemType>
-    messagesData: Array<MessageItemType>, newMessageBody: string
+    messagesData: Array<MessageItemType>
 
 
 }
@@ -151,8 +148,8 @@ export let store: StoreType = {
                 }
 
 
-            ],
-            newMessageBody: ""
+            ]
+
 
         },
         sidebar: [

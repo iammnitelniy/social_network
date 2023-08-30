@@ -1,14 +1,16 @@
 .dialogs {
     display: grid;
     grid-template-columns: 2fr 10fr;
+    color: azure;
 }
 
 .dialogsItems .dialog {
     padding: 10px;
+    color: azure;
 }
 
 .dialogsItems .active {
-    color: gold;
+    color: white;
 }
 
 
@@ -19,4 +21,8 @@
 
 .messages .message {
 
+}
+
+.dialog {
+    background-color: azure;
 }

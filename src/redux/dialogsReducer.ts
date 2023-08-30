@@ -51,7 +51,7 @@ let initialState:DialogsPageStateType = {
 
 
     ],
-    newMessageBody: ""
+
 
 }
 
@@ -64,15 +64,13 @@ let initialState:DialogsPageStateType = {
 
              return {...state, newMessageBody: action.body}
          case SEND_MESSAGE:
-             let body = state.newMessageBody
-             state.newMessageBody = ""
-             state.messagesData.push({
-                 id: 3,
-                 message: body,
-             })
 
 
-             return {...state, messagesData: [...state.messagesData, {id: 3, message: state.newMessageBody}], newMessageBody: ""}
+        return  {...state, messagesData: [...state["messagesData"], {id: 4, message: action.body}]}
+
+
+
+
          default: return state
      }
 
@@ -82,12 +80,13 @@ let initialState:DialogsPageStateType = {
 export type AllDialogsActionsType = SendMessageACType | UpdateNewMessageBodyACType
 export type SendMessageACType = ReturnType<typeof sendMessageActionCreator>
 
-export const sendMessageActionCreator = (): SendMessageType => {
+export const sendMessageActionCreator = (body: string) => {
 
 
     return (
         {
             type: SEND_MESSAGE,
+            body: body
 
         }
     )

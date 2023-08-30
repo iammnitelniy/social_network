@@ -73,14 +73,15 @@ const mapDispatchToProps = (dispatch: any) => {
         updateNewMessageBody: (body: string) => {
             dispatch(updateNewMessageBodyCreator(body))
         },
-        newMessageClicker: () => {
-            dispatch(sendMessageActionCreator())
+        newMessageClicker: (body: string) => {
+
+            dispatch(sendMessageActionCreator(body))
         }
     }
 }
 
 
-export default compose<React.ComponentType>(connect(mapStateToProps, mapDispatchToProps), WithAuthRedirect)(Dialogs)
+export default compose<React.ComponentType>(connect(mapStateToProps, mapDispatchToProps),(WithAuthRedirect))(Dialogs)
 
 
 
