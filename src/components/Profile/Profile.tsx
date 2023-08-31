@@ -29,9 +29,8 @@ export function Profile(props: ProfilePropsType) {
             <ProfileInfo profile={props.profile} status={props.status} updateProfileStatus={props.updateProfileStatus}/>
 
 
-            <MyPostsContainer  />
-            {/*<MyPosts posts={props.stateProfile.postData} dispatch={props.dispatch} addPost={props.addPost}*/}
-            {/*         newPostText={props.stateProfile.newPostText} updateNewPostText={props.updateNewPostText}/>*/}
+            <MyPostsContainer />
+
 
         </div>
 

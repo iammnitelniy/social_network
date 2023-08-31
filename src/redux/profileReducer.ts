@@ -11,13 +11,12 @@ const SET_PROFILE_STATUS = 'SET_PROFILE_STATUS';
 
 type ProfilePageStateTypeRedux =  {
     postData: Array<PostItemType>
-    newPostText: string,
     profile: any,
     status: string
 
 }
 
-let initialState:ProfilePageStateTypeRedux = {
+let initialState = {
     postData: [
         {
             id: 1,
@@ -46,7 +45,6 @@ let initialState:ProfilePageStateTypeRedux = {
 
 
     ],
-    newPostText: "",
     profile: null,
     status: ""
 
@@ -59,16 +57,13 @@ const profileReducer = (state = initialState, action: allProfileActionsType): Pr
          case ADD_POST:
              let newPost = {
                  id: 5,
-                 content: state.newPostText,
+                 content: action.postText,
                  countLikes: 0,
                  countDislikes: 0
              }
 
-             return {...state, postData: [newPost, ...state.postData], newPostText: ""}
+             return {...state, postData: [newPost, ...state.postData]}
 
-         case UPDATE_NEW_POST:
-
-             return {...state, newPostText: action.newText}
 
          case SET_USER_PROFILE:
              return {...state, profile: action.profile}
@@ -83,7 +78,7 @@ const profileReducer = (state = initialState, action: allProfileActionsType): Pr
 
  }
 
-export type allProfileActionsType = addPostACType | updateNewPostTextACType | SetUserProfileACType | SetProfileStatusACType
+export type allProfileActionsType = addPostACType  | SetUserProfileACType | SetProfileStatusACType
 
 export type addPostACType = ReturnType<typeof addPostActionCreator>
 
@@ -98,19 +93,8 @@ export const addPostActionCreator = (text: string): AddPostActionType => {
     )
 }
 
-export type updateNewPostTextACType = ReturnType<typeof updateNewPostTextActionCreator>
-
-export const updateNewPostTextActionCreator = (newText: string) => {
-
-    return (
-        {
-            type: UPDATE_NEW_POST,
-            newText
-        }  as const
-    )
 
 
-}
 
 export type SetUserProfileACType = ReturnType<typeof SetUserProfileAC>
 export const SetUserProfileAC = (profile: ProfileFromAPIType) => {

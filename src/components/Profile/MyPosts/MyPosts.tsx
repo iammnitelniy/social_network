@@ -1,93 +1,70 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import classes from './MyPosts.module.css'
 import {Post} from "./Post/Post";
 import {PostItemType} from "../Profile";
-import {useRef} from "react";
-import {MouseEvent} from "react";
-import {addPostActionCreator,
-    updateNewPostTextActionCreator
-} from "../../../redux/profileReducer";
 import {ActionTypes} from "../../../redux/store";
-
+import {Field, reduxForm} from "redux-form";
 
 
 type MyPostsPropsType = {
     posts: Array<PostItemType>
-    addPost: any
+    addPost: (values: any) => void
     newPostText: string
-    updateNewPostText: (newPost:string)=> void
-    dispatch?: (action: ActionTypes)=> void
+    dispatch?: (action: ActionTypes) => void
 
 
 };
 
 
-
 export function MyPosts(props: MyPostsPropsType) {
 
-    let newPostElement:any = React.createRef()
 
-    const addPostHandler = (e:MouseEvent<HTMLButtonElement>) => {
+    const addPostHandler = (values: any) => {
 
-        let text
-        if (newPostElement.current !== null) {
-            text = newPostElement.current.value
-        }
-        // let action = addPostActionCreator(text)
-        // props.dispatch(action)
-
-        // const text = newPostElement.current?.value
-        //
-        // text &&
-        props.addPost(text)
-        // newPostElement.current.value=("")
-
+        props.addPost(values.newPostBody)
     }
 
-    let onPostChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
-        // let newText
-        // if (newPostElement.current !== null) {
-        //  newText = newPostElement.current.value}
-
-        props.updateNewPostText(e.currentTarget.value)
-        // let action = updateNewPostTextActionCreator(e.currentTarget.value)
-        // props.dispatch(action)
-    }
-
-    // export const PostForm = (props: PropsType) => {
-    //     const {currentUser, profilePage} = props
-    //
-    //     let newPostElement = React.createRef<HTMLTextAreaElement>()
-    //
-    //     const addPostHandler = () => {
-    //         props.addPost()
-    //     }
-    //
-    //     const onPostChange = () => {
-    //         const text = newPostElement.current?.value
-    //         text && props.onPostChange(text)
-    //     }
 
     return (
+
         <div className={classes.postsBlock}>
-            <div>
-                <h3>My posts</h3>
-                <div>
-                    <div>
-
-                    <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}></textarea>
-                    </div>
-                    <button onClick={addPostHandler}>Add post</button>
-                    <button>Remove</button>
-
-                </div>
-            </div>
 
             <div className={classes.posts}>
-                {props.posts.map((el: PostItemType, index: number) => <Post key={index} content={el.content} countLikes={el.countLikes}
-                                            countDislikes={el.countDislikes}/>)}
+                {props.posts.map((el: PostItemType, index: number) => <Post key={index} content={el.content}
+                                                                            countLikes={el.countLikes}
+                                                                            countDislikes={el.countDislikes}/>)}
 
             </div>
+            <div>
+                <h1>My posts</h1>
+
+                <AddNewPostFormRedux onSubmit={addPostHandler}/>
+            </div>
+
+
         </div>
     )
 }
+
+type AddNewPostFormPropsType = {
+    handleSubmit: any
+}
+
+export const AddNewPostForm = (props: AddNewPostFormPropsType) => {
+
+    return (
+        <form onSubmit={props.handleSubmit}>
+
+            <Field component="textarea" name='newPostBody' placeholder='Write post'></Field>
+
+            <button>Add post</button>
+            <button>Remove</button>
+        </form>
+    )
+
+
+}
+
+const AddNewPostFormRedux = reduxForm<any>({form: 'myPostsAddNewPost'})(AddNewPostForm)
+
+

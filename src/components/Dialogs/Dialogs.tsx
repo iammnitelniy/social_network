@@ -15,7 +15,7 @@ import {Field, reduxForm} from "redux-form";
 
 type DialogsPropsType = {
 
-    updateNewMessageBody: (body: string)=> void
+
     dialogsPage: DialogsPageStateType
     newMessageClicker: (body: string) => void
     isAuth: boolean
@@ -38,27 +38,11 @@ export const Dialogs = (props: DialogsPropsType) => {
                                                              message={el.message}  />)
 
 
-
     const addMessage = (values: any) => {
         // store.dispatch(sendMessageActionCreator())
         props.newMessageClicker(values.newMessageBody)
 
-
-
     }
-
-    // const onChangeMessageHandler= (e: ChangeEvent<HTMLTextAreaElement>) => {
-    //
-    //     let body =  e.currentTarget.value
-    //     props.updateNewMessageBody(body)
-    //     // store.dispatch(updateNewMessageBodyCreator(body))
-    //
-    //
-    // }
-
-    // if(!props.isAuth) return <Redirect to={'/login'}/>
-
-
 
     return (
         <div className={classes.dialogs}>
@@ -81,10 +65,7 @@ export const Dialogs = (props: DialogsPropsType) => {
                 <div>{MessageElement}</div>
 
 
-
-
                <AddMessageFormRedux onSubmit={addMessage}/>
-
 
 
             </div>

@@ -60,9 +60,7 @@ let initialState:DialogsPageStateType = {
 
 
      switch (action.type) {
-         case UPDATE_NEW_MESSAGE_BODY:
 
-             return {...state, newMessageBody: action.body}
          case SEND_MESSAGE:
 
 
@@ -77,7 +75,7 @@ let initialState:DialogsPageStateType = {
 }
 
 
-export type AllDialogsActionsType = SendMessageACType | UpdateNewMessageBodyACType
+export type AllDialogsActionsType = SendMessageACType
 export type SendMessageACType = ReturnType<typeof sendMessageActionCreator>
 
 export const sendMessageActionCreator = (body: string) => {
@@ -92,15 +90,6 @@ export const sendMessageActionCreator = (body: string) => {
     )
 }
 
-export type UpdateNewMessageBodyACType = ReturnType<typeof updateNewMessageBodyCreator>
 
-export const updateNewMessageBodyCreator = (body: string): AddNewMessageBodyType => {
-    return (
-        {
-            type: UPDATE_NEW_MESSAGE_BODY,
-            body: body
-        }
-    )
-}
 
 export default dialogsReducer
