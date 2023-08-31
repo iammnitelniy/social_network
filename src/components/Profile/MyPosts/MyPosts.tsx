@@ -4,6 +4,8 @@ import {Post} from "./Post/Post";
 import {PostItemType} from "../Profile";
 import {ActionTypes} from "../../../redux/store";
 import {Field, reduxForm} from "redux-form";
+import {maxLengthCreator, required} from "../../utils/validator";
+import {TextArea} from "../../FormsControls/FormControls";
 
 
 type MyPostsPropsType = {
@@ -50,12 +52,16 @@ type AddNewPostFormPropsType = {
     handleSubmit: any
 }
 
+const maxLength10 = maxLengthCreator(10)
+
 export const AddNewPostForm = (props: AddNewPostFormPropsType) => {
 
     return (
         <form onSubmit={props.handleSubmit}>
 
-            <Field component="textarea" name='newPostBody' placeholder='Write post'></Field>
+            <Field component={TextArea} name='newPostBody' placeholder='Write post'
+            validate={[required, maxLength10]}
+            ></Field>
 
             <button>Add post</button>
             <button>Remove</button>
