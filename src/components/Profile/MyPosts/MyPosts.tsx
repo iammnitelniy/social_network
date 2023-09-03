@@ -52,8 +52,10 @@ type AddNewPostFormPropsType = {
     handleSubmit: any
 }
 
-const maxLength10 = maxLengthCreator(10)
+ const maxLength10 = maxLengthCreator(10)
 
+
+//upgrade
 export const AddNewPostForm = (props: AddNewPostFormPropsType) => {
 
     return (
