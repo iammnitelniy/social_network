@@ -2,6 +2,7 @@ import {Dispatch} from "redux";
 import {profileAPI} from "../api/ProfileAPI";
 import {SetUserProfileAC} from "./profileReducer";
 import {authAPI} from "../api/authAPI";
+import {AppThunk} from "./redux-store";
 
 
 const SET_USER_DATE = 'SET_USER_DATE'
@@ -9,9 +10,9 @@ const SET_USER_DATE = 'SET_USER_DATE'
 
 export type ResponseUserType = {
     "data": {
-    "id": number,
-        "login": string,
-        "email": string
+    "id": null | number,
+        "login": null | string,
+        "email": null | string
 },
     "messages": string[]
     "resultCode": number
@@ -46,7 +47,7 @@ export const authReducer = (state = initialState, action: TotalType): AuthInitia
      switch (action.type) {
          case SET_USER_DATE:
 
-                return {...state, userId: action.data.data.id, email: action.data.data.email, login: action.data.data.login, isAuth: true}
+                return {...state, userId: action.data.data.id, email: action.data.data.email, login: action.data.data.login, isAuth: action.isAuth}
 
 
 
@@ -62,27 +63,66 @@ export type TotalType =  setUserACType
 
 export type setUserACType = ReturnType<typeof setAuthUserAC>
 
-export const setAuthUserAC = (data: ResponseUserType) => {
+export const setAuthUserAC = (data: ResponseUserType, isAuth: boolean) => {
     return(
         {
             type: SET_USER_DATE,
-            data
+            data, isAuth
         } as const
     )
 }
 
-export const setAuthUserTC = () => (dispatch: Dispatch) => {
+export const setAuthUserTC = () => (dispatch: AuthThunkDispatch) => {
 
 
     authAPI.getProfile()
         .then((res: { data: ResponseUserType }) => {
             if (res.data.resultCode === 0) {
-               dispatch(setAuthUserAC(res.data))
+               dispatch(setAuthUserAC(res.data, true))
             }
         })
         .catch((error: any) => {
             console.log(error)
         })
 }
+
+export const login = (email: any, password: any, rememberMe: any): AppThunk => (dispatch) => {
+
+console.log({ email, password })
+    return authAPI.login(email, password, rememberMe)
+        .then((res) => {
+            console.log({ res })
+            if (res.data.resultCode === 0) {
+               dispatch(setAuthUserTC())
+            }
+        })
+        .catch((error: any) => {
+            console.log(error)
+        })
+}
+export const logout = () => (dispatch: Dispatch) => {
+
+
+    authAPI.logout()
+        .then((res) => {
+            if (res.data.resultCode === 0) {
+               dispatch(setAuthUserAC({
+                   data: {
+                       id: null,
+                       login: null,
+                       email: null
+                   },
+                   messages: [],
+                   resultCode: 1
+               }, true))
+            }
+        })
+        .catch((error: any) => {
+            console.log(error)
+        })
+}
+
+
+type AuthThunkDispatch = Dispatch<TotalType>
 
 
