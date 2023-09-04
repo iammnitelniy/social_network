@@ -3,6 +3,7 @@ import {profileAPI} from "../api/ProfileAPI";
 import {SetUserProfileAC} from "./profileReducer";
 import {authAPI} from "../api/authAPI";
 import {AppThunk} from "./redux-store";
+import {stopSubmit} from "redux-form";
 
 
 const SET_USER_DATE = 'SET_USER_DATE'
@@ -86,7 +87,7 @@ export const setAuthUserTC = () => (dispatch: AuthThunkDispatch) => {
         })
 }
 //update
-export const login = (email: any, password: any, rememberMe: any): AppThunk => (dispatch) => {
+export const login = (email: any, password: any, rememberMe: any) => (dispatch: any) => {
 
 console.log({ email, password })
     return authAPI.login(email, password, rememberMe)
@@ -96,7 +97,8 @@ console.log({ email, password })
                dispatch(setAuthUserTC())
             }
             else {
-                alert(res.data.messages)
+                const action = stopSubmit('login', {_error: 'something is wrong'})
+                dispatch(action)
             }
         })
         .catch((error: any) => {
