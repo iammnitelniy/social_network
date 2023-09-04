@@ -85,7 +85,7 @@ export const setAuthUserTC = () => (dispatch: AuthThunkDispatch) => {
             console.log(error)
         })
 }
-
+//update
 export const login = (email: any, password: any, rememberMe: any): AppThunk => (dispatch) => {
 
 console.log({ email, password })
