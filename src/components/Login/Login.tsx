@@ -3,11 +3,13 @@ import {Field, reduxForm} from "redux-form";
 import {Input} from "../FormsControls/FormControls";
 import {required} from "../utils/validator";
 import {connect} from "react-redux";
+import {Redirect} from "react-router-dom";
 
 
 type LoginPropsType = {
     login: (email: string, password: string, rememberMe: boolean) => void
     logout: () => void
+    isAuth: boolean
 }
 
 export const Login = (props: LoginPropsType) => {
@@ -17,22 +19,22 @@ export const Login = (props: LoginPropsType) => {
     }
 
 
-    //update2
-    return (
+    if (props.isAuth) {
+        return <Redirect to={'/profile'}/>
+    } else {
+        return (
 
-        <div>
+            <div>
 
+                <h1>
+                    Login
+                </h1>
 
-            <h1>
-                Login
-            </h1>
-
-            <LoginReduxForm onSubmit={onSubmit}/>
-
-
-        </div>
-    );
-};
+                <LoginReduxForm onSubmit={onSubmit}/>
+            </div>
+        );
+    }
+}
 
 
 export type LoginFormPropsType = {

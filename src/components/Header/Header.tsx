@@ -4,6 +4,7 @@ import {NavLink} from "react-router-dom";
 
 type HeaderPropsType = {
     auth: any
+    logout: () => void
 }
 
 export function Header(props: HeaderPropsType) {
@@ -15,7 +16,7 @@ export function Header(props: HeaderPropsType) {
 
             <div className={classes.loginBlock}>
                 {props.auth.isAuth ?
-                    props.auth.login :
+                <div> {props.auth.login} - <button onClick={props.logout}>Log out</button> </div>     :
 
                     <NavLink to={'/login'}>Login</NavLink>
 

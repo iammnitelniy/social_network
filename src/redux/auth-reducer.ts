@@ -95,6 +95,9 @@ console.log({ email, password })
             if (res.data.resultCode === 0) {
                dispatch(setAuthUserTC())
             }
+            else {
+                alert(res.data.messages)
+            }
         })
         .catch((error: any) => {
             console.log(error)
@@ -114,7 +117,7 @@ export const logout = () => (dispatch: Dispatch) => {
                    },
                    messages: [],
                    resultCode: 1
-               }, true))
+               }, false))
             }
         })
         .catch((error: any) => {

@@ -3,7 +3,7 @@ import {NavLink, withRouter} from "react-router-dom";
 import classes from "*.module.css";
 import {Header} from "./Header";
 import axios from "axios";
-import {ResponseUserType, setAuthUserAC, setAuthUserTC} from "../../redux/auth-reducer";
+import {logout, ResponseUserType, setAuthUserAC, setAuthUserTC} from "../../redux/auth-reducer";
 import {AppStateType} from "../../redux/redux-store";
 import {connect, ConnectedProps} from "react-redux";
 import {Dispatch} from "redux";
@@ -38,7 +38,7 @@ class HeaderContainer extends React.Component<PropsFromRedux, State>{
 
 
         return (
-            <Header auth={this.props.auth}/>
+            <Header logout={this.props.logout} auth={this.props.auth}/>
         )
     }
 }
@@ -55,6 +55,10 @@ const mapDispatchToProps = (dispatch: any) => ({
     setAuthUserTC: () => {
         dispatch(setAuthUserTC());
     },
+    logout: () => {
+        dispatch(logout());
+
+    }
 });
 
 const connector = connect(mapStateToProps, mapDispatchToProps);

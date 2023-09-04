@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import {getProfileStatusTC, getUserProfileTC, updateProfileStatusTC} from '../../redux/profileReducer';
 import {withRouter} from 'react-router-dom';
 import {compose} from "redux";
+import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
+import {Dialogs} from "../Dialogs/Dialogs";
 
 
 
@@ -100,7 +102,14 @@ const mapDispatchToProps = (dispatch: any) => ({
 });
 
 
-export default  compose<React.ComponentType>(connect(mapStateToProps,mapDispatchToProps),withRouter)(ProfileContainer)
+//export default  compose<React.ComponentType>(connect(mapStateToProps,mapDispatchToProps),withRouter)(ProfileContainer)
+
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, mapDispatchToProps),
+    withRouter,
+    WithAuthRedirect
+)(ProfileContainer);
+
 
 // const connector = connect(mapStateToProps, mapDispatchToProps);
 //

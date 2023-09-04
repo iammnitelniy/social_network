@@ -31,7 +31,7 @@ class LoginContainer extends React.Component<any, State> {
 
 
         return (
-           <Login login={this.props.login} logout={this.props.logout}/>
+           <Login isAuth={this.props.auth} login={this.props.login} logout={this.props.logout}/>
         );
     }
 }
@@ -47,7 +47,7 @@ const mapStateToProps = (state: any) => {
 
     )
 }
-//update
+
 
 const mapDispatchToProps = (dispatch: any) => ({
     login: (email: string, password: string, rememberMe: boolean) => {
@@ -56,6 +56,7 @@ const mapDispatchToProps = (dispatch: any) => ({
     logout: () => {
         dispatch(logout());
     },
+
 
 });
 
