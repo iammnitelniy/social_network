@@ -97,8 +97,9 @@ console.log({ email, password })
                dispatch(setAuthUserTC())
             }
             else {
-                const action = stopSubmit('login', {_error: 'something is wrong'})
-                dispatch(action)
+
+                dispatch(stopSubmit('login', {email: res.data.messages}))
+
             }
         })
         .catch((error: any) => {
