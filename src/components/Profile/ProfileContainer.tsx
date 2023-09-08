@@ -115,6 +115,9 @@ export default compose<React.ComponentType>(
 //boom
 //update
 
+
+//updates
+
 // const connector = connect(mapStateToProps, mapDispatchToProps);
 //
 // type PropsFromRedux = ConnectedProps<typeof connector>;
