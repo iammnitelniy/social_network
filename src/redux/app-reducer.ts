@@ -24,7 +24,6 @@ export const appReducer = (state = initialState, action: TotalType) => {
 
     switch (action.type) {
         case SET_INITIALIZED:
-            debugger
 
             return {...state, isInitialized: action.isInitialized}
 
@@ -45,7 +44,6 @@ export type setInitializedACType = ReturnType<typeof setInitializedAC>
 export const setInitializedAC = (isInitialized: boolean) => ({type: 'SET_INITIALIZED', isInitialized} as const)
 
 export const initializeApp = () => (dispatch: any) => {
-    debugger
     dispatch(setAuthUserTC())
 
         .then (() => {dispatch(setInitializedAC(true))})
