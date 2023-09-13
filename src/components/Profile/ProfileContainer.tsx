@@ -5,11 +5,6 @@ import {getProfileStatusTC, getUserProfileTC, updateProfileStatusTC} from '../..
 import {withRouter} from 'react-router-dom';
 import {compose} from "redux";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
-import {Dialogs} from "../Dialogs/Dialogs";
-
-
-
-
 
 
 interface State {
@@ -114,7 +109,7 @@ export default compose<React.ComponentType>(
 
 //boom
 //update
-
+//update
 
 //updates
 

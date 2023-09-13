@@ -76,7 +76,7 @@ export const setAuthUserAC = (data: ResponseUserType, isAuth: boolean) => {
 export const setAuthUserTC = () => (dispatch: AuthThunkDispatch) => {
 
 
-    authAPI.getProfile()
+  return  authAPI.getProfile()
         .then((res: { data: ResponseUserType }) => {
             if (res.data.resultCode === 0) {
                dispatch(setAuthUserAC(res.data, true))
