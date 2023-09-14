@@ -1,4 +1,5 @@
-import React from "react";
+
+import {createSelector} from "reselect";
 
 export const getUsers = (state: any) => {
 return state.users.users
@@ -22,3 +23,7 @@ return state.users.isFetching
 export const getFollowingInProgress = (state: any) => {
 return state.users.followingInProgress
 }
+
+export const getUsersSelector = createSelector(getUsers, (users: []) => {
+    return users.filter(u => u === true)
+})
