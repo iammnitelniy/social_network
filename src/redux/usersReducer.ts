@@ -176,6 +176,7 @@ export const SetIsFetchingAC = (isFetching: boolean) => {
         } as const
     )
 }
+//update
 
 export type ToggleFollowingProgressACType = ReturnType<typeof ToggleFollowingProgressAC>
 
