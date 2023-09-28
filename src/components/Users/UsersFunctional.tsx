@@ -1,8 +1,7 @@
 import React from 'react';
-import s from "./UsersClass.module.css";
 import {UserType} from "../../redux/usersReducer";
-import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../api/usersAPI";
+import {Paginator} from "./Paginator";
+import {User} from "./User";
 
 
 export type UsersFunctionalPropsType = {
@@ -16,7 +15,7 @@ export type UsersFunctionalPropsType = {
     unFollowTC: any
     followTC: any
 }
-//update 12345
+
 
 const UsersFunctional = (props: UsersFunctionalPropsType) => {
 
@@ -30,64 +29,15 @@ const UsersFunctional = (props: UsersFunctionalPropsType) => {
     return (
 
             <div>
-                <div>
-
-
-                    {pages.map((el, index) => {return <span key={index} onClick={(e) => {props.onPageChanged(el)}} className={Number(props.currentPage) === el ? s.selectedPage : ""}>{el}</span>})}
-
-                </div>
+               <Paginator onPageChanged={props.onPageChanged} currentPage={props.currentPage} pageSize={props.pageSize} totalUsersCount={props.totalUsersCount}/>
 
 
 
 
-                { props?.users.map(u => (
-                    <div key={u.id}>
-                        <div>
-                            <div>
-                                <NavLink to={'/profile/' + u.id}>
-                                <img
-                                    src={
-                                        u.photos?.small != null
-                                            ? u.photos.small
-                                            : 'https://img.freepik.com/free-icon/user_318-159711.jpg'
-                                    }
-                                    className={s.userPhoto}
-                                />
-                                </NavLink>
-                            </div>
-                            {u.followed ? (
-                                <button disabled={props.followingInProgress.some((id: number) => id === u.id)}  onClick={() => {
+                {props?.users.map(u => <User unFollowTC={props.unFollowTC} followTC={props.followTC} name={u.name} status={u.status} id={u.id} photos={u.photos} followingInProgress={props.followingInProgress} followed={u.followed}/>)}
 
-                                  props.unFollowTC(u.id)
-
-                                }
-                                }>Unfollow</button>
-                            ) : (
-                                <button disabled={props.followingInProgress.some((id: number) => id === u.id)} onClick={() => {
-                                  props.followTC(u.id)
-
-
-                                }
-                                }>Follow</button>
-                            )}
-                            <div></div>
-                        </div>
-                        <span>
-                <span>
-                  <div>{u.name}</div>
-                  <div>{u.status}</div>
-                </span>
-                <span>
-                  <div>{u.followed}</div>
-                  <div>{u.uniqueUrlName}</div>
-                </span>
-              </span>
-                    </div>
-                ))
-                }
             </div>
 
-    );
-};
-
+)
+}
 export default UsersFunctional;

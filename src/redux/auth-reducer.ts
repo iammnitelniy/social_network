@@ -73,38 +73,48 @@ export const setAuthUserAC = (data: ResponseUserType, isAuth: boolean) => {
     )
 }
 
-export const setAuthUserTC = () => (dispatch: AuthThunkDispatch) => {
+export const setAuthUserTC = () => async (dispatch: AuthThunkDispatch) => {
+
+    const res = await authAPI.getProfile()
+
+    try {
+        if (res.data.resultCode === 0) {
+            dispatch(setAuthUserAC(res.data, true))
+        } else {
+            console.log(res.statusText)
+        }
+
+    } catch {
+        console.log('error')
+    }
 
 
-  return  authAPI.getProfile()
-        .then((res: { data: ResponseUserType }) => {
-            if (res.data.resultCode === 0) {
-               dispatch(setAuthUserAC(res.data, true))
-            }
-        })
-        .catch((error: any) => {
-            console.log(error)
-        })
 }
 //update
-export const login = (email: any, password: any, rememberMe: any) => (dispatch: any) => {
+export const login = (email: any, password: any, rememberMe: any) => async (dispatch: any) => {
 
 console.log({ email, password })
-    return authAPI.login(email, password, rememberMe)
-        .then((res) => {
-            console.log({ res })
-            if (res.data.resultCode === 0) {
-               dispatch(setAuthUserTC())
-            }
-            else {
+   const res = await authAPI.login(email, password, rememberMe)
 
-                dispatch(stopSubmit('login', {email: res.data.messages}))
+           try {
 
-            }
-        })
-        .catch((error: any) => {
-            console.log(error)
-        })
+
+               if (res.data.resultCode === 0) {
+                   dispatch(setAuthUserTC())
+               }
+               else {
+
+                   dispatch(stopSubmit('login', {email: res.data.messages}))
+
+               }
+           }
+
+
+        catch {
+            console.log(res.statusText)
+        }
+
+
 }
 export const logout = () => (dispatch: Dispatch) => {
 
