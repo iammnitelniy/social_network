@@ -107,11 +107,9 @@ export default compose<React.ComponentType>(
     WithAuthRedirect
 )(ProfileContainer);
 
-//boom
-//update
-//update
 
-//updates
+
+
 
 // const connector = connect(mapStateToProps, mapDispatchToProps);
 //

@@ -1,12 +1,8 @@
 import React, {useEffect} from 'react';
 import './App.css';
 import {Nav} from "./components/Nav/Nav";
-import {BrowserRouter, NavLink, Route} from "react-router-dom";
-import {
-    ActionTypes,
-
-} from "./redux/store";
-
+import {BrowserRouter, Route} from "react-router-dom";
+import {ActionTypes,} from "./redux/store";
 
 
 import UsersContainer from "./components/Users/UsersContainer";
@@ -16,10 +12,13 @@ import {Login} from "./components/Login/Login";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import LoginContainer from "./components/Login/LoginContainer";
 import {AppStateType} from "./redux/redux-store";
-import {logout, setAuthUserTC} from "./redux/auth-reducer";
 import {connect} from "react-redux";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./components/Preloader/Preloader";
+import {News} from "./components/News/News";
+import {Music} from "./components/Music/Music";
+import {Settings} from "./components/Settings/Settings";
+
 type AppPropsType = {
     addPost?: any
     updateNewPostText?: (newPost:string)=> void
@@ -77,10 +76,10 @@ if(!props.isInitialized) {
                     <Route path='/profile/:userId?'
                            render={() =>
                     <ProfileContainer/>}/>
-                    {/*<Sidebar sidebar={props.store.sidebar}/>*/}
-                    {/*<Route path='/news' component={News}/>*/}
-                    {/*<Route path='/music' component={Music}/>*/}
-                    {/*<Route path='/settings' component={Settings}/>*/}
+
+                    <Route path='/news' render={()=><News/>}/>
+                    <Route path='/music' component={()=><Music/>}/>
+                    <Route path='/settings' component={()=><Settings/>}/>
 
                     <Route path={'/users'} render={()=><UsersContainer/>}/>
                     <Route path={'/login'} render={()=><LoginContainer />}/>

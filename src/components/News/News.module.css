@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Размещаем элементы с пространством между ними. */
+    height: 100%; /* Ширина контейнера для примера. */
+    background-color: lightgray;
+    padding: 10px;
+}
+
+.item1 {
+    height: 100px;
+    background-color: #fff;
+    color: black;
+    padding: 10px;
+
+}
+.item3 {
+    height: 200px;
+    background-color: #fff;
+    color: black;
+    padding: 10px;
+
+}
+
+.flexGrow {
+    flex-grow: 1;
+    height: 5000px;
+    background-color: #fff;
+    color: black;
+    padding: 10px;
+}
