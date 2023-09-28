@@ -9,7 +9,7 @@ const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_PROFILE_STATUS = 'SET_PROFILE_STATUS';
 
 
-type ProfilePageStateTypeRedux =  {
+export type ProfilePageStateTypeRedux =  {
     postData: Array<PostItemType>
     profile: any,
     status: string
