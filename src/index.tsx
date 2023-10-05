@@ -1,12 +1,4 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import './index.css';
-// import App, {DialogItemType, MessageItemType} from './App';
-// import {addPost} from "./redux/state";
-// import {PostItemType} from "./components/Profile/Profile";
-// import {state, StateType} from "./redux/state";
 
-//
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';

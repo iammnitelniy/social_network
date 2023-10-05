@@ -1,5 +1,4 @@
-import {AddNewMessageBodyType, DialogsPageStateType, SendMessageType} from "./store";
-import {addPostActionCreator} from "./profileReducer";
+import {DialogsPageStateType} from "./store";
 
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
 const SEND_MESSAGE = 'SEND-MESSAGE';
