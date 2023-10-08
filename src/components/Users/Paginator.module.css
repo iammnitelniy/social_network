@@ -1,3 +1,45 @@
+
+/* Paginator container */
+.paginator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+}
+
+/* Paginator buttons */
+.paginator button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.paginator button:hover {
+    background-color: #0056b3;
+}
+
+/* Paginator pages */
+.paginator .page {
+    background-color: #fff;
+    color: #007bff;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin: 0 2px;
+    cursor: pointer;
+}
+
+.paginator .page.selected {
+    background-color: #007bff;
+    color: #fff;
+}
+
+
+
 .selectedPage {
     font-weight: bold;
 }

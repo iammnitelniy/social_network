@@ -29,7 +29,7 @@ const UsersFunctional = (props: UsersFunctionalPropsType) => {
     return (
 
             <div>
-               <Paginator onPageChanged={props.onPageChanged} currentPage={props.currentPage} pageSize={props.pageSize} totalUsersCount={props.totalUsersCount}/>
+               <Paginator onPageChanged={props.onPageChanged} currentPage={props.currentPage} pageSize={props.pageSize} totalItemsCount={props.totalUsersCount} portionSize={10}/>
 
 
 

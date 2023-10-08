@@ -1,12 +1,14 @@
-import {AnyAction, applyMiddleware, combineReducers, createStore} from "redux";
+import {AnyAction, applyMiddleware, combineReducers, compose, createStore} from "redux";
 import profileReducer, {allProfileActionsType} from "./profileReducer";
 import dialogsReducer, {AllDialogsActionsType} from "./dialogsReducer";
 import sidebarReducer from "./sidebarReducer";
 import {usersReducer, UsersTotalType} from "./usersReducer";
 import {authReducer, TotalType} from "./auth-reducer";
 import thunkMiddleware, {ThunkAction, ThunkDispatch} from "redux-thunk";
-import {reducer as formReducer } from 'redux-form'
+import {reducer, reducer as formReducer} from 'redux-form'
 import {appReducer} from "./app-reducer";
+
+
 
 
 let reducers = combineReducers({
@@ -19,13 +21,13 @@ let reducers = combineReducers({
     form: formReducer
 })
 
+// @ts-ignore
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+export const store = createStore(reducers,  composeEnhancers(applyMiddleware(thunkMiddleware)
+));
 
-// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-// const store = createStore(reducer,  composeEnhancers(applyMiddleware(...middleware)
-// ));
 
-
-export const store = createStore(reducers, applyMiddleware(thunkMiddleware))
+//export const store = createStore(reducers, applyMiddleware(thunkMiddleware))
 
 export type AppStateType = ReturnType<typeof reducers>
 
