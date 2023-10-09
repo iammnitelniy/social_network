@@ -18,6 +18,8 @@ type ProfilePropsType = {
     profile: ProfileFromAPIType,
     status: string
     updateProfileStatus: any
+    isOwner: any
+    setAvatar: (file: any) => void
 
 }
 
@@ -27,7 +29,7 @@ export function Profile(props: ProfilePropsType) {
     return (
         <div>
 
-            <ProfileInfo profile={props.profile} status={props.status} updateProfileStatus={props.updateProfileStatus}/>
+            <ProfileInfo profile={props.profile} status={props.status} updateProfileStatus={props.updateProfileStatus} isOwner={props.isOwner} setAvatar={props.setAvatar}/>
 
 
             <MyPostsContainer />

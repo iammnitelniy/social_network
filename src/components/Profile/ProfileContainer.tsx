@@ -1,7 +1,7 @@
 import React from 'react';
 import {Profile} from './Profile';
 import {connect} from 'react-redux';
-import {getProfileStatusTC, getUserProfileTC, updateProfileStatusTC} from '../../redux/profileReducer';
+import {getProfileStatusTC, getUserProfileTC, savePhotoTC, updateProfileStatusTC} from '../../redux/profileReducer';
 import {withRouter} from 'react-router-dom';
 import {compose} from "redux";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
@@ -38,15 +38,32 @@ export type ProfileFromAPIType = {
 class ProfileContainer extends React.Component<any, State> {
 
 
-    componentDidMount() {
-
-
+    refreshProfile() {
         let userId = this.props.match.params.userId
         if (!userId) {
             userId = this.props.authorizedUserId
         }
-         this.props.getUserProfile(userId)
+        this.props.getUserProfile(userId)
         this.props.getProfileStatus(userId)
+    }
+
+
+    componentDidMount() {
+
+
+       this.refreshProfile()
+
+
+    }
+
+    componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<State>, snapshot?: any) {
+
+
+        if(this.props.match.params.userId != prevProps.match.params.userId)
+        {
+            this.refreshProfile()
+
+        }
 
 
     }
@@ -60,6 +77,8 @@ class ProfileContainer extends React.Component<any, State> {
                 <Profile profile={this.props.profile}
                          status={this.props.statusFromServer}
                          updateProfileStatus={this.props.updateProfileStatus}
+                         isOwner={!this.props.params?.userId}
+                         setAvatar={this.props.setAvatar}
 
                 />
             </div>
@@ -77,7 +96,7 @@ const mapStateToProps = (state: any) => {
             profile: state.profilePage.profile,
             statusFromServer: state.profilePage.status,
             authorizedUserId: state.auth.userId,
-            isAuth: state.auth.isAuth
+            isAuth: state.auth.isAuth,
 
 
         }
@@ -96,6 +115,10 @@ const mapDispatchToProps = (dispatch: any) => ({
     updateProfileStatus: (status: string) => {
         dispatch(updateProfileStatusTC(status));
     },
+    setAvatar: (file: any) => {
+        dispatch(savePhotoTC(file))
+    }
+
 });
 
 

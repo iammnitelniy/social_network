@@ -7,6 +7,7 @@ const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_PROFILE_STATUS = 'SET_PROFILE_STATUS';
+const SET_AVATAR = 'SET_AVATAR';
 
 
 export type ProfilePageStateTypeRedux =  {
@@ -45,7 +46,9 @@ let initialState = {
 
 
     ],
-    profile: null,
+    profile: {
+        photos: ''
+    },
     status: ""
 
 }
@@ -71,6 +74,9 @@ const profileReducer = (state = initialState, action: allProfileActionsType): Pr
          case SET_PROFILE_STATUS:
              return {...state, status: action.status}
 
+         case SET_AVATAR:
+             return {...state, profile: {...state.profile, photos: action.photos}}
+
          default:
              return state
      }
@@ -78,7 +84,7 @@ const profileReducer = (state = initialState, action: allProfileActionsType): Pr
 
  }
 
-export type allProfileActionsType = addPostACType  | SetUserProfileACType | SetProfileStatusACType
+export type allProfileActionsType = addPostACType  | SetUserProfileACType | SetProfileStatusACType | saveAvatarSuccessACType
 
 export type addPostACType = ReturnType<typeof addPostActionCreator>
 
@@ -120,6 +126,22 @@ export const SetProfileStatusAC = (status: string) => {
     )
 }
 
+export type saveAvatarSuccessACType = ReturnType<typeof saveAvatarSuccess>
+export const saveAvatarSuccess = (photos: any) => {
+
+    return (
+        {
+            type: SET_AVATAR,
+            photos
+        } as const
+
+    )
+}
+
+
+
+
+
 
 export const getUserProfileTC = (userId: string) => (dispatch: Dispatch) => {
 
@@ -146,6 +168,19 @@ export const updateProfileStatusTC = (status: string) => (dispatch: Dispatch) =>
             }
         })
 }
+export const savePhotoTC = (file: any)  => async (dispatch: Dispatch) => {
+
+  const res = await profileAPI.savePhoto(file)
+        try {
+            if(res.data.resultCode === 0 ) {
+                dispatch(saveAvatarSuccess(res.data.data.photos))
+            }
+        }
+        catch (e) {
+            console.error(e)
+        }
+}
+
 
 
 
